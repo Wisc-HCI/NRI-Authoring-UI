@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <title>NRI Authoring Environment</title>
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'>
+  
+  <link rel='stylesheet' href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/app.css"/>
+
+</head>
+
+<body ng-cloak layout="column" ng-controller="AppController as app">
+
+  <!-- Container #1: Header Toolbar -->
+  <md-toolbar layout="row" class="md-toolbar-tools">
+    <md-button class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()"
+               aria-label="Show Therblig List">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h2 flex md-truncate>NRI Authoring Environment</h2>
+    <md-button class="md-button" ng-click="app.connectROS()"
+      aria-label="check">
+      <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"></md-icon>
+      Test ROS
+    </md-button>
+    <!-- Check ROS status -->
+    <md-button class="md-button" ng-click="app.getPosition()"
+      aria-label="check">
+      <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
+      Get Position
+    </md-button>
+    <md-button class="md-button" ng-click="app.checkROS()"
+      aria-label="check">
+      <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
+      Check ROS
+    </md-button>
+    <md-button class="md-button" ng-click="app.save(app.tasks)"
+      aria-label="save">
+      <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
+      Save Plan
+    </md-button>
+    <!-- Load Button -->
+    <md-button ngf-select ng-model="file" class="md-button" aria-label="upload">
+      <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"></md-icon>
+      Load Plan
+    </md-button>
+  </md-toolbar>
+
+  <!-- Container #2: Main Container -->
+  <div flex layout="row">
+
+    <!-- Container #3: Therblig List-->
+    <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
+                md-component-id="left" ng-click="app.toggleList()">
+      <!-- Title -->
+      <md-tabs md-stretch-tabs="auto" md-dynamic-height="true">
+        <md-tab label="therbligs">
+          <br>
+          <div>
+            <md-button class="md-primary md-raised" ng-click="app.physicalList()">Physical</md-button>
+            <therbligs-list class="p-t-list"
+              therbligs="app.physicalTherbligs"
+              allowed-types="['physical']"
+              selected="app.selected"
+              on-selected="app.selectTherblig(therblig)">
+            </therbligs-list>
+          </div>
+          <div>
+            <md-button class="md-primary" ng-click="app.cogitiveList()">Cognitive</md-button>
+              <therbligs-list class="c-t-list"
+                therbligs="app.physicalTherbligs"
+                allowed-types="['physical']"
+                selected="app.selected"
+                on-selected="app.selectTherblig(therblig)">
+              </therbligs-list>
+          </div>
+          <div>
+            <md-button class="md-primary">Physical and Cognitive</md-button>
+            <therbligs-list class="cp-t-list"
+              therbligs="app.cogPhysTherbligs"
+              allowed-types="['cognitivePhysical']"
+              selected="app.selected"
+              on-selected="app.selectTherblig(therblig)">
+            </therbligs-list>
+          </div>
+
+          <!--- testing something -->
+          <!--
+            <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
+                md-component-id="left" ng-click="app.toggleList()">
+              <md-tabs md-stretch-tabs="auto" md-dynamic-height="true">
+                <md-tab label="Physical">
+                   <therbligs-list
+                    therbligs="app.physicalTherbligs"
+                    allowed-types="['physical']"
+                    selected="app.selected"
+                    on-selected="app.selectTherblig(therblig)">
+                  </therbligs-list>
+                </md-tab>
+                <md-tab label="Congitive">
+                  <therbligs-list
+                    therbligs="app.physicalTherbligs"
+                    allowed-types="['physical']"
+                    selected="app.selected"
+                    on-selected="app.selectTherblig(therblig)">
+                  </therbligs-list>
+                </md-tab>
+                <md-tab label="Congitive and Physical">
+                  <therbligs-list
+                    therbligs="app.cogPhysTherbligs"
+                    allowed-types="['cognitivePhysical']"
+                    selected="app.selected"
+                    on-selected="app.selectTherblig(therblig)">
+                  </therbligs-list>
+                </md-tab>
+              </md-tabs>
+            </md-sidenav>
+          !-->
+
+          <!-- testing something -->
+          <!---
+          <md-divider md-inset class="md-caption"> Physical </md-divider>
+          <therbligs-list
+                therbligs="app.physicalTherbligs"
+                allowed-types="['physical']"
+                selected="app.selected"
+                on-selected="app.selectTherblig(therblig)">
+          </therbligs-list>
+          <md-divider md-inset class="md-caption"> Cognitive </md-divider>
+          <therbligs-list
+                therbligs="app.cognitiveTherbligs"
+                allowed-types="['cognitive']"
+                selected="app.selected"
+                on-selected="app.selectTherblig(therblig)">
+          </therbligs-list>
+          <md-divider md-inset class="md-caption"> Cognitive and Physical </md-divider>
+          <therbligs-list
+                therbligs="app.cogPhysTherbligs"
+                allowed-types="['cognitivePhysical']"
+                selected="app.selected"
+                on-selected="app.selectTherblig(therblig)">
+          </therbligs-list> !-->
+
+        </md-tab>
+
+        <md-tab label="things">
+          <!-- Toolbar for Save and upload -->
+          <md-toolbar class="md-accent">
+            <div class="md-toolbar-tools">
+
+              <md-button ngf-select ng-model="thingsFile" class="md-button" aria-label="Favorite">
+                <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg" style="color: greenyellow;"></md-icon>
+                Upload Things
+              </md-button>
+
+              <md-button class="md-button" aria-label="More"
+              ng-click="app.saveThings(app.things)">
+                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg" style="color: greenyellow;"></md-icon>
+                Save Things
+              </md-button>
+            </div>
+          </md-toolbar>
+          <things-list things="app.things">
+          </things-list>
+        </md-tab>
+
+        <md-tab label="positions">
+          <!-- Toolbar for Save and upload -->
+          <md-toolbar class="md-accent">
+            <div class="md-toolbar-tools">
+
+              <md-button ngf-select ng-model="positionsFile"
+                class="md-button positions-toolbar-button"
+                aria-label="Upload Positions">
+                <md-icon
+                  md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
+                  style="color: greenyellow;"></md-icon>
+                Upload Positions
+              </md-button>
+
+              <md-button class="md-button positions-toolbar-button"
+                         aria-label="Save Positions"
+              ng-click="app.savePositions(app.positions)">
+                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
+                  style="color: greenyellow;"></md-icon>
+                Save Positions
+              </md-button>
+            </div>
+          </md-toolbar>
+          <positions-list positions="app.positions">
+          </positions-list>
+        </md-tab>
+
+        <md-tab label="macros">
+          <!-- Toolbar for Save and upload -->
+          <md-toolbar class="md-accent">
+            <div class="md-toolbar-tools">
+
+              <md-button ngf-select ng-model="macrosFile"
+                class="md-button" aria-label="Upload Macros">
+                <md-icon
+                  md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
+                  style="color: greenyellow;"></md-icon>
+                Upload Macros
+              </md-button>
+
+              <md-button class="md-button" aria-label="Save Macros"
+              ng-click="app.saveMacros(app.macros)">
+                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
+                  style="color: greenyellow;"></md-icon>
+                Save Macros 
+              </md-button>
+            </div>
+          </md-toolbar>
+          <macros-list macros="app.macros">
+          </macros-list>
+        </md-tab>
+
+      </md-tabs>
+
+      <!-- Custom TherbligList component -->
+    </md-sidenav>
+
+    <!-- Container #4: Task  Cards -->
+    <md-content flex id="content" style="background-color: #f8f6f6;">
+      <task-cards tasks="app.tasks" selected="app.selected"
+        positions="app.positions" things="app.things" macros="app.macros"
+        on-selected="app.selectTherblig(therblig)">
+      </task-cards>
+    </md-content>
+    
+    <!-- Floating FAB-->
+    <!--
+    <md-button class="md-fab"
+      ng-click="app.switchEnv($event, app.Env)" aria-label="Switch Environment">
+      <span style="font-size: 2em;">+</span>
+    </md-button>
+    -->
+
+    <!-- Floating FAB-->
+    <md-button class="md-fab md-fab-bottom-right md-accent tooltip" 
+      ng-click="app.addTask($event, app.tasks)" aria-label="Add Task">
+      <md-icon>add</md-icon>
+      <md-tooltip>test</md-tooltip>
+    </md-button>
+  </div>
+
+  <script src="./jspm_packages/system.js" type="text/javascript"></script>
+  <script src="config.js" type="text/javascript"></script>
+  <script src="build.js"></script>
+  <script type="text/javascript">
+    System
+        .import('src/boot/boot')
+        .catch( console.error.bind(console) ); // make sure any errors print to console
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
+  <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+</body>
+</html>

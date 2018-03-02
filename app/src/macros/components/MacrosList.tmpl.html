@@ -1,0 +1,19 @@
+
+<md-list dnd-list="$ctrl.macros" dnd-allowed-types="['macro']" >
+
+  <!-- List of Macros -->
+  <md-list-item ng-repeat="macro in $ctrl.macros | unique: 'name'"
+        dnd-draggable="macro"
+        dnd-type="macro.type"
+        dnd-moved="$ctrl.macros.splice($index, 1)"
+        dnd-effect-allowed="copy"
+        >
+        <span class="md-button md-raised button-text"
+           ng-click="$ctrl.editMacro($event, macro, $ctrl.macros)"
+           ng-class="{'selected': macro === $ctrl.selected}">
+          {{ macro.name }}
+          <md-icon class="button-icon"
+          md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg"></md-icon>
+          </span>
+  </md-list-item>
+</md-list>

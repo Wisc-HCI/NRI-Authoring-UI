@@ -1,0 +1,42 @@
+<md-dialog>
+  <form ng-cloak>
+
+    <!-- Header -->
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Edit Macro</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close dialog"
+          ng-click="cancel()">
+          <md-icon md-svg-src="../assets/svg/ic_close_white_24px.svg"
+            aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <!-- Input Area -->
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div class="md-inline-form">
+          <md-input-container class="md-icon-float md-block">
+        <!-- Use floating label instead of placeholder -->
+            <label>Macro Name</label>
+            <md-icon class="name"></md-icon>
+            <input ng-model="macro.name" type="text" placeholder="{{ macro.name }}"
+              md-autofocus ng-keyup="$event.keyCode == 13 && cancel()">
+          </md-input-container>
+        </div>
+      </div>
+
+      <md-content layout-padding>
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+          <md-button class="md-raised md-primary" ng-click="cancel()">Done</md-button>
+          <md-button class="md-icon-button" aria-label="Delete Macro" 
+            ng-click="delete(macro)">
+            <md-icon md-svg-src="../assets/svg/ic_delete_black_24px.svg"></md-icon>
+          </md-button>
+        </section>
+      </md-content>
+    </md-dialog-content>
+  </form>
+</md-dialog>

@@ -1,0 +1,1 @@
+module.exports = require("npm:angular-file-saver@1.1.3/dist/angular-file-saver.bundle.js");

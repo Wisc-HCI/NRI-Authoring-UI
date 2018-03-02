@@ -1,0 +1,71 @@
+<md-dialog>
+  <form name="editTask" ng-cloak>
+
+    <!-- Header -->
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Edit Task</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close dialog" 
+          ng-click="cancel()">
+          <md-icon md-svg-src="../assets/svg/ic_close_white_24px.svg" 
+            aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <!-- Input Area -->
+    <md-dialog-content>
+      <div class="md-dialog-content">
+          <div class="md-inline-form">
+            <md-input-container class="md-icon-float md-block">
+          <!-- Use floating label instead of placeholder -->
+              <label>Task Name</label>
+              <md-icon class="name"></md-icon>
+              <input name="taskName" ng-model="task.name" type="text" placeholder="{{ task.name }}"
+                md-autofocus ng-keyup="(!editTask.taskName.$error.required) && ($event.keyCode == 13 && cancel())" required>
+            </md-input-container>      
+        </div>
+      </div>
+
+      <!-- Task Parameter Form -->
+      <md-content layout-padding>
+        <div>
+            <form name="taskForm" >
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm 
+                      ng-keyup="$event.keyCode == 13 && cancel()">
+                  <label> Repeat </label>
+                <input type="number" ng-model="task.repeat" type="text" min="0">
+              </md-input-container>
+            </div>
+          </form>
+        </div>
+        </md-content>
+
+        <!-- Done and Delete Buttons -->
+        <md-content layout-padding>
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+            <md-button class="md-raised md-primary" ng-click="cancel()"
+                       ng-disabled="editTask.taskName.$error.required">Done</md-button>
+            <md-button class="md-icon-button" aria-label="Close dialog" 
+              ng-click="delete(task)">
+              <md-icon md-svg-src="../assets/svg/ic_delete_black_24px.svg" 
+                aria-label="Delete Task"></md-icon>
+            </md-button>
+          </section>
+          <section layout="row" layout-align="center center">
+              <md-button class="md-button md-raised md-primary" 
+                aria-label="Save as Macro" 
+                ng-click="saveMacro(task.name, task.therbligList)"
+                ng-disabled="editTask.taskName.$error.required">
+                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
+                  style="color: greenyellow;"></md-icon>
+                Save as Macro 
+              </md-button>
+          </section>
+        </md-content>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>

@@ -1,0 +1,17 @@
+
+<md-list dnd-list="$ctrl.things" dnd-allowed-types="['thing']" >
+
+  <!-- List of Things -->
+  <md-list-item ng-repeat="thing in $ctrl.things | unique: 'name'"
+        dnd-draggable="thing"
+        dnd-type="thing.type"
+        dnd-moved="$ctrl.things.splice($index, 1)"
+        dnd-effect-allowed="copy">
+        <md-button class="md-raised md-primary button-text" 
+          ng-click="$ctrl.editThing($event, thing)"
+          ng-class="{'selected': thing === $ctrl.selected}"> 
+          {{ thing.name }}
+          <md-icon class="button-icon" md-svg-icon="../assets/svg/ic_mode_edit_white_24px.svg"></md-icon>
+        </md-button>
+  </md-list-item>
+</md-list>

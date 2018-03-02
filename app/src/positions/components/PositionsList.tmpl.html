@@ -1,0 +1,10 @@
+<md-list>
+  <md-list-item ng-repeat="position in $ctrl.positions">
+    <span class="md-button md-primary md-raised button-text"
+      ng-click="$ctrl.editPosition($event, position)">
+      {{ position.name }}
+      <md-icon class="button-icon"
+      md-svg-icon="../assets/svg/ic_mode_edit_white_24px.svg"></md-icon>
+    </span>
+  </md-list-item>
+</md-list>

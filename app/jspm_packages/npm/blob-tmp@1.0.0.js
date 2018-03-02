@@ -1,0 +1,1 @@
+module.exports = require("npm:blob-tmp@1.0.0/Blob.js");

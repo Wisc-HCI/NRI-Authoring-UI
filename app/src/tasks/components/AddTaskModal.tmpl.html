@@ -1,0 +1,39 @@
+<md-dialog>
+  <form name="addTask" ng-cloak>
+
+    <!-- Header -->
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add Task</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close dialog" 
+          ng-click="cancel()">
+          <md-icon md-svg-src="../assets/svg/ic_close_white_24px.svg" 
+            aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <!-- Input Area -->
+    <md-dialog-content>
+      <div class="md-dialog-content">
+          <div class="md-inline-form">
+            <md-input-container class="md-icon-float md-block">
+              <label>Task Name</label>
+              <md-icon class="name"></md-icon>
+              <input name="taskName" ng-model="task.name" type="text" 
+                placeholder="{{ task.name }}" md-autofocus 
+                ng-keyup="(!addTask.taskName.$error.required) && ($event.keyCode == 13 && done())" required>
+            </md-input-container>      
+        </div>
+      </div>
+      <md-content layout-padding>
+        <section layout="row" layout-sm="column" layout-align="center center" 
+          layout-wrap>
+          <md-button class="md-raised md-primary" ng-click="done()" ng-disabled="addTask.taskName.$error.required">Done</md-button>
+        </section>
+      </md-content>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>
