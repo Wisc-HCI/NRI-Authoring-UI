@@ -271,12 +271,12 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     $mdSidenav('left').toggle();
   };
 
-  self.physicalList = () => {
-
-  };
-
-  self.cognitiveList = () => {
-    
+  $scope.test = function($event){
+    var cName = $event.target.className;
+    if (cName === "md-primary md-raised md-button md-ink-ripple")
+      $event.target.className = "md-primary md-button md-ink-ripple";
+    else
+      $event.target.className = "md-primary md-raised md-button md-ink-ripple";
   };
 }
 

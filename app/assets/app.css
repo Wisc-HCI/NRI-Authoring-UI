@@ -25,14 +25,6 @@ md-toolbar h1 {
 }
 
 /* Sidenav area */
-.c-t-list {
-  display: none;
-}
-
-.cp-t-list {
-  display: none;
-}
-
 .therblig-action {
   transition: all .2s ease-in-out;
 }

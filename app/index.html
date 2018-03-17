@@ -63,8 +63,8 @@
         <md-tab label="therbligs">
           <br>
           <div>
-            <md-button class="md-primary md-raised" ng-click="app.physicalList()">Physical</md-button>
-            <therbligs-list class="p-t-list"
+            <md-button class="md-primary" ng-click="showDetails =! showDetails; test($event)">Physical</md-button>
+            <therbligs-list ng-show="showDetails"
               therbligs="app.physicalTherbligs"
               allowed-types="['physical']"
               selected="app.selected"
@@ -72,8 +72,8 @@
             </therbligs-list>
           </div>
           <div>
-            <md-button class="md-primary" ng-click="app.cogitiveList()">Cognitive</md-button>
-              <therbligs-list class="c-t-list"
+            <md-button class="md-primary" ng-click="showDetails2 = ! showDetails2; test($event)">Cognitive</md-button>
+              <therbligs-list ng-show="showDetails2"
                 therbligs="app.physicalTherbligs"
                 allowed-types="['physical']"
                 selected="app.selected"
@@ -81,8 +81,8 @@
               </therbligs-list>
           </div>
           <div>
-            <md-button class="md-primary">Physical and Cognitive</md-button>
-            <therbligs-list class="cp-t-list"
+            <md-button class="md-primary" ng-click="showDetails3 = ! showDetails3; test($event)">Physical and Cognitive</md-button>
+            <therbligs-list ng-show="showDetails3"
               therbligs="app.cogPhysTherbligs"
               allowed-types="['cognitivePhysical']"
               selected="app.selected"
