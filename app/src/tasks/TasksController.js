@@ -1,6 +1,6 @@
 "use strict";
 
-function TasksController($mdDialog, $scope) {
+function TasksController($mdDialog, $scope, $mdMenu) {
   var self = this;
 
   // Updates Therblig object
@@ -26,6 +26,12 @@ function TasksController($mdDialog, $scope) {
     else valid = therblig.constraints.indexOf(pTherblig) > -1;
 
     return valid;
+  }
+
+  var originatorEv;
+  self.openMenu = (ev,$mdMenu) => {
+    originatorEv = ev;
+    $mdMenu.open(ev);
   }
 
   /*

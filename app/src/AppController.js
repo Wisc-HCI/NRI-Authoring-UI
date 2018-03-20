@@ -93,10 +93,16 @@ function AppController(TherbligsDataService, TaskCardsDataService,
         });
   };
 
+  var originatorEv;
+  self.openMenu = ($mdMenu, ev) => {
+    originatorEv = ev;
+    $mdMenu.open(ev);
+  }
+
   /*
    * Controller for the modal to add tasks
    */
-  function AddTaskController($scope, $mdDialog) {
+  function AddTaskController($scope, $mdDialog,$mdMenu) {
     // Once done, close modal and add the task to the task list
     $scope.done = function() {
       $mdDialog.cancel();
@@ -271,7 +277,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     $mdSidenav('left').toggle();
   };
 
-  $scope.test = function($event){
+  $scope.btnToggle = function($event){
     var cName = $event.target.className;
     if (cName === "md-primary md-raised md-button md-ink-ripple")
       $event.target.className = "md-primary md-button md-ink-ripple";

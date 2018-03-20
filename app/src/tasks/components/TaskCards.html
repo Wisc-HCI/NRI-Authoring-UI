@@ -20,10 +20,32 @@
               </md-card-title>
             </div>
             <div>
-              <md-button class="md-icon-button" aria-label="More" 
-                ng-click="$ctrl.editTask($event, task, $ctrl.tasks, $ctrl.macros)">
-                <md-icon md-svg-icon="../assets/svg/ic_more_vert_black_24px.svg"></md-icon>
-              </md-button>
+              <md-menu>
+                  <md-button class="md-icon-button" aria-label="More" ng-click="$ctrl.openMenu($event,$mdMenu)">
+                    <md-icon md-menu-origin="" md-svg-icon="../assets/svg/ic_more_vert_white_24px.svg"></md-icon>
+                  </md-button>
+                  <md-menu-content width="3">
+                    <md-menu-item>
+                      <md-button class="md-button" aria-label="Assign Task">
+                        <md-icon md-svg-icon="../assets/svg/ic_assignment_black_24px.svg"></md-icon>
+                        Assign Task
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button class="md-button" aria-label="Edit Task" ng-click="$ctrl.editTask($event, task, $ctrl.tasks, $ctrl.macros)">
+                        <md-icon md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                        Edit Task
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item>
+                      <md-button class="md-button" ng-click="delete(task)" aria-label="Delete Task">
+                        <md-icon md-svg-icon="../assets/svg/ic_delete_black_24px.svg"></md-icon>
+                        Delete Task
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+              </md-menu>
             </div>
           </div>
 

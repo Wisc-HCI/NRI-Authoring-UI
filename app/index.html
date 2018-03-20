@@ -24,12 +24,41 @@
       <md-icon md-svg-icon="menu"></md-icon>
     </md-button>
     <h2 flex md-truncate>NRI Authoring Environment</h2>
-    <md-button class="md-button" ng-click="app.connectROS()"
-      aria-label="check">
-      <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"></md-icon>
-      Test ROS
-    </md-button>
+    <md-menu>
+      <md-button class="md-icon-button" aria-label="Open menu" ng-click="app.openMenu($mdMenu, $event)">
+        <md-icon md-menu-origin="" md-svg-icon="../assets/svg/ic_more_vert_white_24px.svg"></md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.getPosition()" aria-label="check">
+            <md-icon md-svg-icon="../assets/svg/ic_location_searching_black_24px.svg"></md-icon>
+            Get Position
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.checkROS()" aria-label="check">
+            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
+            Check ROS
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.save(app.tasks)" aria-label="save">
+            <md-icon md-svg-icon="../assets/svg/ic_save_black_24px.svg"></md-icon>
+            Save Plan
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ngf-select ng-model="file" class="md-button" aria-label="upload">
+            <md-icon md-svg-icon="../assets/svg/ic_file_upload_black_24px.svg"></md-icon>
+            Load Plan
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
     <!-- Check ROS status -->
+    <!--
     <md-button class="md-button" ng-click="app.getPosition()"
       aria-label="check">
       <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
@@ -45,11 +74,12 @@
       <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
       Save Plan
     </md-button>
-    <!-- Load Button -->
+    
     <md-button ngf-select ng-model="file" class="md-button" aria-label="upload">
       <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"></md-icon>
       Load Plan
     </md-button>
+    !-->
   </md-toolbar>
 
   <!-- Container #2: Main Container -->
@@ -63,8 +93,8 @@
         <md-tab label="therbligs">
           <br>
           <div>
-            <md-button class="md-primary" ng-click="showDetails =! showDetails; test($event)">Physical</md-button>
-            <therbligs-list ng-show="showDetails"
+            <md-button class="md-primary md-raised" ng-click="showDetails =! showDetails; btnToggle($event)">Physical</md-button>
+            <therbligs-list ng-show="!showDetails"
               therbligs="app.physicalTherbligs"
               allowed-types="['physical']"
               selected="app.selected"
@@ -72,7 +102,7 @@
             </therbligs-list>
           </div>
           <div>
-            <md-button class="md-primary" ng-click="showDetails2 = ! showDetails2; test($event)">Cognitive</md-button>
+            <md-button class="md-primary" ng-click="showDetails2 =! showDetails2; btnToggle($event)">Cognitive</md-button>
               <therbligs-list ng-show="showDetails2"
                 therbligs="app.physicalTherbligs"
                 allowed-types="['physical']"
@@ -81,7 +111,7 @@
               </therbligs-list>
           </div>
           <div>
-            <md-button class="md-primary" ng-click="showDetails3 = ! showDetails3; test($event)">Physical and Cognitive</md-button>
+            <md-button class="md-primary" ng-click="showDetails3 =! showDetails3; btnToggle($event)">Physical and Cognitive</md-button>
             <therbligs-list ng-show="showDetails3"
               therbligs="app.cogPhysTherbligs"
               allowed-types="['cognitivePhysical']"
