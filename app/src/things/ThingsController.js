@@ -3,6 +3,7 @@
 function ThingsController($mdDialog, $scope) {
   var self = this;
   var thingToEdit;
+
   self.editThing = (ev, thing) => {
     thingToEdit = thing;
     $mdDialog.show({
@@ -15,10 +16,15 @@ function ThingsController($mdDialog, $scope) {
         });
   };
 
+
   function EditThingController($mdDialog, $scope) {
     $scope.thing = thingToEdit;
     $scope.cancel = function() {
       $mdDialog.cancel();
+    };
+
+    $scope.getPosition = () => {
+      alert("get getPosition");
     };
   }
 }

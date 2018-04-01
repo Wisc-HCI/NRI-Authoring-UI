@@ -34,6 +34,12 @@ function TasksController($mdDialog, $scope, $mdMenu) {
     $mdMenu.open(ev);
   }
 
+  self.deleteTask = (task,tasks) => {
+      var taskList = tasks;
+      var index = taskList.indexOf(task);
+      taskList.splice(index, 1);
+    };
+
   /*
    * Edit the therblig.
    *
@@ -95,7 +101,6 @@ function TasksController($mdDialog, $scope, $mdMenu) {
     $scope.task = taskToEdit;
     
     $scope.cancel = function() {
-      console.log(taskToEdit);
       $mdDialog.cancel();
     };
 

@@ -1,7 +1,8 @@
 
-function connectROS(){
+function connectROS(addr){
+  //url : 'ws://192.168.56.101:9090'
   var ros = new ROSLIB.Ros({
-      url : 'ws://192.168.56.101:9090'
+      url : addr
     });
 
   ros.on('connection', function() {

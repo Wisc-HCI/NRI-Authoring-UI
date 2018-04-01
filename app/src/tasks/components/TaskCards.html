@@ -26,12 +26,6 @@
                   </md-button>
                   <md-menu-content width="3">
                     <md-menu-item>
-                      <md-button class="md-button" aria-label="Assign Task">
-                        <md-icon md-svg-icon="../assets/svg/ic_assignment_black_24px.svg"></md-icon>
-                        Assign Task
-                      </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
                       <md-button class="md-button" aria-label="Edit Task" ng-click="$ctrl.editTask($event, task, $ctrl.tasks, $ctrl.macros)">
                         <md-icon md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg"></md-icon>
                         Edit Task
@@ -39,7 +33,21 @@
                     </md-menu-item>
                     <md-menu-divider></md-menu-divider>
                     <md-menu-item>
-                      <md-button class="md-button" ng-click="delete(task)" aria-label="Delete Task">
+                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
+                        ng-click="$ctrl.assignTask($event, task)">
+                        <md-icon md-svg-icon="../assets/svg/ic_assignment_black_24px.svg"></md-icon>
+                        Assign Task
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0">
+                        <md-icon md-svg-icon="../assets/svg/ic_send_black_24px.svg"></md-icon>
+                        Execute Task
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item>
+                      <md-button class="md-button" ng-click="$ctrl.deleteTask(task, $ctrl.tasks)" aria-label="Delete Task">
                         <md-icon md-svg-icon="../assets/svg/ic_delete_black_24px.svg"></md-icon>
                         Delete Task
                       </md-button>
@@ -61,14 +69,15 @@
                 dnd-type="therblig.type"
                 dnd-moved="task.therbligList.splice($index, 1)"
                 dnd-effect-allowed="move">
-                <span class="md-button md-raised" 
-                 ng-class="{'selected': therblig === $ctrl.selected}">
-                    {{ therblig.name }}              
-                <md-button class="md-icon-button button-icon" aria-label="Edit Therblig"
-                  ng-click="$ctrl.editTherblig($event, therblig, task.therbligList)">
-                 <md-icon md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg">
-                 </md-icon>
-                </md-button>
+                <span class="md-button md-raised">
+                  <div ng-class="{'selected': therblig === $ctrl.selected}">
+                      {{ therblig.name }}              
+                    <md-button style="right: 0px; position:absolute;" class="md-icon-button button-icon" aria-label="Edit Therblig"
+                      ng-click="$ctrl.editTherblig($event, therblig, task.therbligList)">
+                     <md-icon md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg">
+                     </md-icon>
+                    </md-button>
+                  </div>
 
                   <!-- Things -->
                   <div layout="row">

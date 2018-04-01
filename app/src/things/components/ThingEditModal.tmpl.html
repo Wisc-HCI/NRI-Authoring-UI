@@ -31,7 +31,10 @@
       <!-- Thing Parameter Form -->
       <md-content layout-padding>
         <div>
-            <form name="thingForm" >
+          <form name="thingForm" >
+            <md-button class="md-button md-raised md-primary" ng-click="getPosition()" aria-label="check">
+              Get Position
+            </md-button>
             <div layout-gt-sm="row" ng-repeat="parameter in thing.parameters">
               <md-input-container class="md-block" flex-gt-sm 
                       ng-keyup="$event.keyCode == 13 && cancel()">

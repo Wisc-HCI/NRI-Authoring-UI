@@ -1,8 +1,8 @@
 <md-dialog>
   <form ng-cloak>
     <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Edit Therblig</h2>
+      <div class="md-toolbar-tools" ng-model="therblig.name">
+        <h2>Edit {{ therblig.name }}</h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close dialog" ng-click="cancel()">
           <md-icon md-svg-src="../assets/svg/ic_done_white_24px.svg" aria-label="Close dialog"></md-icon>
@@ -11,19 +11,6 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <!-- Name Input -->
-      <div class="md-dialog-content">
-          <div class="md-inline-form">
-            <md-input-container class="md-icon-float md-block">
-              <label>Therblig Name</label>
-              <md-icon class="name"></md-icon>
-              <input ng-model="therblig.name" type="text" 
-              placeholder="{{ therblig.name }}" md-autofocus
-              ng-keyup="$event.keyCode == 13 && cancel()">
-            </md-input-container>      
-        </div>
-      </div>
-
       <!-- Therblig Parameter Form -->
       <md-content layout-padding>
         <div>
@@ -42,14 +29,17 @@
       
       <!-- Name Input -->
       <div class="md-dialog-content" ng-hide="therblig.thing == null">
-        <div class="md-inline-form">
+        <div class="md-inline-form" ng-model="therblig.thing.name">
+          <h3>{{therblig.thing.name}}<h3>
+          <!--
           <md-input-container class="md-icon-float md-block">
             <label>Thing Name</label>
             <md-icon class="name"></md-icon>
             <input ng-model="therblig.thing.name" type="text" 
             placeholder="{{ therblig.thing.name }}" 
             ng-keyup="$event.keyCode == 13 && cancel()">
-          </md-input-container>      
+          </md-input-container>     
+          --> 
         </div>
       </div>
 

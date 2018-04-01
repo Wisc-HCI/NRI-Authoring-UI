@@ -13,6 +13,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   ThingsDataService, $mdSidenav, $mdDialog, $scope, $http, FileSaver, Blob, Upload,
   $timeout, PositionsDataService, MacrosDataService) {
   var self = this;
+  var url;
 
   // Things Variables
   self.things = [];
@@ -142,7 +143,9 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   };
 
   self.connectROS = () => {
-    connectROS();
+    url = prompt("Enter the address of the ROS server to connect to: ");
+    
+    connectROS(url);
   };
 
   /*
