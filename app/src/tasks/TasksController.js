@@ -29,9 +29,27 @@ function TasksController($mdDialog, $scope, $mdMenu) {
   }
 
   var originatorEv;
-  self.openMenu = (ev,$mdMenu) => {
+  self.openTaskMenu = (ev,$mdMenu) => {
     originatorEv = ev;
     $mdMenu.open(ev);
+  }
+
+  /*
+  *
+  */
+  self.executePlan = (ev,task) => {
+    var action = {"Action":"ExecutePlan"};
+    action["content"] = [];
+    action["content"].push(task);
+    //console.log(JSON.stringify(action));
+    $scope.$emit("executePlan",action);
+  }
+
+  //testing emitting
+  self.testROS = () => {
+    var args;
+    alert("test ros task controller");
+    $scope.$emit("testROS",args);
   }
 
   self.deleteTask = (task,tasks) => {

@@ -22,6 +22,8 @@ app.get('/', function(req, res, next) {
 });
 	
 app.post('/performROSAction', (req, res) => {
+	console.log("performing ROS action...");
+
 	var client = new net.Socket();
 	client.connect(PORT, HOST, function(){
 		console.log('CONNECTED TO: ' + HOST + ':' + PORT);

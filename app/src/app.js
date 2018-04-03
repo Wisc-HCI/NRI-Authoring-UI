@@ -43,7 +43,7 @@ export default angular.module( 'starter-app', [
       }
       else{
         filtered = [];
-        console.log(therbligList[index-1].thing);
+        //console.log(therbligList[index-1].thing);
         filtered.push(therbligList[index-1].thing);
       }
 

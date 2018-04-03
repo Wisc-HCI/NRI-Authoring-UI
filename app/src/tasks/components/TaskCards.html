@@ -21,7 +21,7 @@
             </div>
             <div>
               <md-menu>
-                  <md-button class="md-icon-button" aria-label="More" ng-click="$ctrl.openMenu($event,$mdMenu)">
+                  <md-button class="md-icon-button" aria-label="More" ng-click="$ctrl.openTaskMenu($event,$mdMenu)">
                     <md-icon md-menu-origin="" md-svg-icon="../assets/svg/ic_more_vert_white_24px.svg"></md-icon>
                   </md-button>
                   <md-menu-content width="3">
@@ -34,13 +34,14 @@
                     <md-menu-divider></md-menu-divider>
                     <md-menu-item>
                       <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
-                        ng-click="$ctrl.assignTask($event, task)">
+                        ng-click="$ctrl.testROS()">
                         <md-icon md-svg-icon="../assets/svg/ic_assignment_black_24px.svg"></md-icon>
                         Assign Task
                       </md-button>
                     </md-menu-item>
                     <md-menu-item>
-                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0">
+                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
+                        ng-click="$ctrl.executePlan($event, task)">
                         <md-icon md-svg-icon="../assets/svg/ic_send_black_24px.svg"></md-icon>
                         Execute Task
                       </md-button>

@@ -72,6 +72,26 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   // Internal methods
   // *********************************
 
+  //testing emitting
+  $scope.$on("testROS", function(event, args){
+    alert("testROS");
+  });
+
+  $scope.$on("executePlan", function(event, args){
+    console.log(JSON.stringify(args));
+    
+    var data, config;
+    var data = args;
+
+    $http.post('/performROSAction', data, config)
+    .success(function (data, status, headers, config) {
+        alert(JSON.stringify(data));
+    })
+    .error(function (data, status, header, config) {
+        console.log("Error");
+    });
+  });
+
   // Therblig Task Modal Variables
   var therbligTasks = [];
   var taskToEdit = {};
@@ -130,6 +150,8 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   * Check ROS
   */
   self.checkROS = () => {
+    console.log("checking ROS...")
+    
     var data,config;
     data = {"Action":"CheckROSLive"};
 

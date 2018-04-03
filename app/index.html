@@ -30,7 +30,7 @@
       </md-button>
       <md-menu-content width="4">
         <md-menu-item>
-          <md-button class="md-button" ng-click="app.connectROS()" aria-label="check">
+          <md-button class="md-button" ng-click="app.checkROS()" aria-label="check">
             <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
             Check ROS
           </md-button>
@@ -113,64 +113,6 @@
               on-selected="app.selectTherblig(therblig)">
             </therbligs-list>
           </div>
-
-          <!--- testing something -->
-          <!--
-            <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
-                md-component-id="left" ng-click="app.toggleList()">
-              <md-tabs md-stretch-tabs="auto" md-dynamic-height="true">
-                <md-tab label="Physical">
-                   <therbligs-list
-                    therbligs="app.physicalTherbligs"
-                    allowed-types="['physical']"
-                    selected="app.selected"
-                    on-selected="app.selectTherblig(therblig)">
-                  </therbligs-list>
-                </md-tab>
-                <md-tab label="Congitive">
-                  <therbligs-list
-                    therbligs="app.physicalTherbligs"
-                    allowed-types="['physical']"
-                    selected="app.selected"
-                    on-selected="app.selectTherblig(therblig)">
-                  </therbligs-list>
-                </md-tab>
-                <md-tab label="Congitive and Physical">
-                  <therbligs-list
-                    therbligs="app.cogPhysTherbligs"
-                    allowed-types="['cognitivePhysical']"
-                    selected="app.selected"
-                    on-selected="app.selectTherblig(therblig)">
-                  </therbligs-list>
-                </md-tab>
-              </md-tabs>
-            </md-sidenav>
-          !-->
-
-          <!-- testing something -->
-          <!---
-          <md-divider md-inset class="md-caption"> Physical </md-divider>
-          <therbligs-list
-                therbligs="app.physicalTherbligs"
-                allowed-types="['physical']"
-                selected="app.selected"
-                on-selected="app.selectTherblig(therblig)">
-          </therbligs-list>
-          <md-divider md-inset class="md-caption"> Cognitive </md-divider>
-          <therbligs-list
-                therbligs="app.cognitiveTherbligs"
-                allowed-types="['cognitive']"
-                selected="app.selected"
-                on-selected="app.selectTherblig(therblig)">
-          </therbligs-list>
-          <md-divider md-inset class="md-caption"> Cognitive and Physical </md-divider>
-          <therbligs-list
-                therbligs="app.cogPhysTherbligs"
-                allowed-types="['cognitivePhysical']"
-                selected="app.selected"
-                on-selected="app.selectTherblig(therblig)">
-          </therbligs-list> !-->
-
         </md-tab>
 
         <md-tab label="things">
