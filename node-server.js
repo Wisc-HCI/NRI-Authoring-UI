@@ -9,6 +9,7 @@ var app = express();
 
 
 var HOST = os.hostname();
+//var HOST = '10.140.169.116';
 var PORT = 9999;
 
 app.use(bodyParser.json());
@@ -22,7 +23,7 @@ app.get('/', function(req, res, next) {
 });
 	
 app.post('/performROSAction', (req, res) => {
-	console.log("performing ROS action...");
+	//console.log("performing ROS action...");
 
 	var client = new net.Socket();
 	client.connect(PORT, HOST, function(){
@@ -31,11 +32,16 @@ app.post('/performROSAction', (req, res) => {
 	    // the server will receive it as message from the client 
 
 	    var ROSAction = JSON.stringify(req.body);
-		if(client.write(ROSAction.length + '\n' + ROSAction + '\n')){
+		if(client.write(ROSAction)){
 	    	console.log("Data flushed successfully");
 	    }else{
 	    	console.log("Unsuccessful");
     	}
+		/*if(client.write(ROSAction.length + '\n' + ROSAction + '\n')){
+	    	console.log("Data flushed successfully");
+	    }else{
+	    	console.log("Unsuccessful");
+    	}*/
 	});
 
 	// Add a 'data' event handler for the client socket

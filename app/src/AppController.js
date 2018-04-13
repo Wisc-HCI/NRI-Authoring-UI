@@ -77,6 +77,26 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     alert("testROS");
   });
 
+  $scope.$on("getPosition", function(event, args){
+    var data, config;
+    var position;
+    data = args;
+    var URL = 'ws://10.140.169.116:9090'
+    position = connectROS(URL);
+    position = '1 2 3';
+    $scope.$root.$broadcast('returnPosition',position);
+
+    /*
+    $http.post('/performROSAction', data, config)
+    .success(function (data, status, headers, config) {
+        $scope.$root.$broadcast('returnPosition',data);
+    })
+    .error(function (data, status, header, config) {
+        console.log("Error");
+    });
+    */
+  });
+
   $scope.$on("executePlan", function(event, args){
     console.log(JSON.stringify(args));
     

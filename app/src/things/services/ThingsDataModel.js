@@ -1,64 +1,68 @@
 "use strict";
 
-var position = {
-  name: 'Position (X, Y, Z)',
-  val: '',
-};
+function position(val){
+  this.name = 'Position (X, Y, Z)';
+  this.val = '';
+
+  /*this.x = x;
+  this.y = y;
+  this.z = z;*/
+}
 
 var things = [
   {
     name: 'A',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'B',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'C',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'D',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'E',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'F',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'G',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   },
   {
     name: 'H',
     parameters: [
-      position,
+      new position(),
     ],
     type: 'thing'
   }
