@@ -1,5 +1,3 @@
-import ROSController from 'src/ros';
-
 /**
  * Main App Controller for the Angular Material Starter App
  * @param TherbligsDataService
