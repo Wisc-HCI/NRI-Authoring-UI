@@ -14,8 +14,9 @@ import Tasks from 'src/tasks/Tasks';
 import Things from 'src/things/Things';
 import Positions from 'src/positions/Positions';
 import Macros from 'src/macros/Macros';
+import rosService from 'src/ros/rosService'
 
-export default angular.module( 'starter-app', [
+export default angular.module( 'nri-authoring-env', [
     'ngMaterial',
     'dndLists',
     'ui.filters',
@@ -25,7 +26,8 @@ export default angular.module( 'starter-app', [
     Tasks.name,
     Things.name,
     Positions.name,
-    Macros.name] )
+    Macros.name,
+    'rosService'] )
   .config(($mdIconProvider, $mdThemingProvider) => {
 
     $mdIconProvider

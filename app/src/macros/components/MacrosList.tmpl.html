@@ -2,7 +2,7 @@
 <md-list dnd-list="$ctrl.macros" dnd-allowed-types="['macro']" >
 
   <!-- List of Macros -->
-  <md-list-item ng-repeat="macro in $ctrl.macros | unique: 'name'"
+  <md-list-item class="sidebar-item" ng-repeat="macro in $ctrl.macros | unique: 'name'"
         dnd-draggable="macro"
         dnd-type="macro.type"
         dnd-moved="$ctrl.macros.splice($index, 1)"

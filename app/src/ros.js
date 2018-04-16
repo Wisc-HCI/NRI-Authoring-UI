@@ -1,4 +1,4 @@
-
+/*
 function connectROS(addr){
   var end_effector_position;
 
@@ -38,3 +38,4 @@ function connectROS(addr){
   end_effector_position='1223 21212 122';
   return end_effector_position;
 };
+*/

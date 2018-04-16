@@ -1,9 +1,15 @@
 'use strict';
 
-function ThingsController($mdDialog, $scope) {
+/*
+ * Controller for Things object. 
+ */
+function ThingsController($mdDialog, $scope, rosWebService) {
   var self = this;
   var thingToEdit;
 
+  /*
+   * Handles when a Thing object is edited from the sidebar.
+   */
   self.editThing = (ev, thing) => {
     thingToEdit = thing;
     $mdDialog.show({
@@ -16,32 +22,25 @@ function ThingsController($mdDialog, $scope) {
         });
   };
 
+  /*
+   * EditThing controller
+   */
   function EditThingController($mdDialog, $scope) {
     var self = this;
-
     $scope.thing = thingToEdit;
-
-    //
-    console.log(thingToEdit.name)
 
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
 
     $scope.getPosition = (ev) => {
-      var action = {"Action":"GetPosition"};
-      //https://stackoverflow.com/questions/27261626/
-      //angularjs-why-is-emit-not-working-from-my-popup-window?utm_medium=
-      //organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-      $scope.$root.$broadcast("getPosition",action);
+      rosWebService.getArmPosition().then(function(position,) {
+        $scope.thing.parameters[0].val = position.X + ", " + position.Y + ", " + position.Z;
+        $scope.thing.parameters[1].val = position.ThetaX + ", " + position.ThetaY + ", " + position.ThetaZ;
+        $scope.$apply();
+      });
     };
-
-    $scope.$on("returnPosition", function(event, args){
-      //console.log(args);
-      //console.log($scope.thing);
-      $scope.thing.parameters[0].val = args;
-    });
   }
 }
 
-export default [ '$mdDialog', '$scope', ThingsController ];
+export default [ '$mdDialog', '$scope', 'rosWebService', ThingsController ];

@@ -1,0 +1,124 @@
+﻿[
+	{
+		"name":"Test Plan",
+		"therbligsList":
+		[
+			{
+				"name":"Transport Empty",
+				"type":"physical",
+				"parameters":[
+					{
+						"name":"Position X",
+						"type":"position",
+						"val":"0.54882, -0.30854,0.65841" 
+					},
+					{
+						"name":"Orientation",
+						"val":"0.68463,-0.22436, 0.68808, 0.086576"
+					},
+					{
+						"name":"Angle",
+						"val":""
+					},
+					{
+						"name":"Arm",
+						"val":""
+					}
+				],
+				"constraints": ["","Pick and Drop","Release Loaded"],
+				"obtainThing":false,
+				"hasThing":false,
+				"$$hashKey":"object:168"
+			},
+			{
+				"name":"Grasp",
+				"type":"physical",
+				"parameters":[
+					{
+						"name":"Effort",
+						"val":"50"
+					},
+					{
+						"name":"Arm",
+						"val":""}
+				],
+				"thing":{
+					"name":"A",
+					"parameters":[ 
+						{
+							"name":"Position (X, Y, Z)",
+							"val":""
+						} 
+					],
+					"type":"thing",
+					"$$hashKey":"object:100"
+				},
+				"constraints":["","Transport Empty","Pick and Drop","Position","Release Loaded"],
+				"obtainThing":true,"hasThing":true,"$$hashKey":"object:225"
+			},
+			{
+				"name":"Transport Loaded",
+				"type":"physical",
+				"parameters":[
+					{
+						"name":"Position Y",
+						"type":"position",
+						"val":"0.13944, 0.25935,0.69044",
+						"$$hashKey":"object:126"
+					},
+					{
+						"name":"Orientation",
+						"val":"0.33707,-0.93151, -0.11101, 0.07957"
+					},
+					{
+						"name":"Angle",
+						"val":"" 
+					},
+					{	"name":"Arm",
+						"val":""
+					}
+				],
+				"thing":{
+					"name":"A",
+					"parameters":[
+						{
+							"name":"Position (X, Y, Z)",
+							"val":""
+						}
+					],
+					"type":"thing",
+					"$$hashKey":"object:100"
+				},
+				"constraints":["Grasp","Hold"],
+				"obtainThing":false,
+				"hasThing":true,
+				"$$hashKey":"object:280"
+			},
+			{
+				"name":"Release Load",
+				"type":"physical",
+				"parameters":[
+					{
+						"name":"Arm",
+						"val":""}
+				],
+				"thing":{
+					"name":"A",
+					"parameters":[
+						{
+							"name":"Position (X, Y, Z)",
+							"val":""
+						}
+					],
+				"type":"thing",
+				"$$hashKey":"object:100"
+				},
+				"constraints":["Transport Loaded","Hold"],
+				"hasThing":false,
+				"$$hashKey":"object:314"
+			}
+		],
+		"type":"macro",
+		"$$hashKey":"object:391"
+	}
+]

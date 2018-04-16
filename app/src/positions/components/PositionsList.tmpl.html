@@ -1,5 +1,5 @@
 <md-list>
-  <md-list-item ng-repeat="position in $ctrl.positions">
+  <md-list-item class="sidebar-item" ng-repeat="position in $ctrl.positions">
     <span class="md-button md-primary md-raised button-text"
       ng-click="$ctrl.editPosition($event, position)">
       {{ position.name }}

@@ -1,6 +1,6 @@
 "use strict";
 
-function TasksController($mdDialog, $scope, $mdMenu) {
+function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
   var self = this;
 
   // Updates Therblig object
@@ -41,15 +41,7 @@ function TasksController($mdDialog, $scope, $mdMenu) {
     var action = {"Action":"ExecutePlan"};
     action["content"] = [];
     action["content"].push(task);
-    //console.log(JSON.stringify(action));
-    $scope.$emit("executePlan",action);
-  }
-
-  //testing emitting
-  self.testROS = () => {
-    var args;
-    alert("test ros task controller");
-    $scope.$emit("testROS",args);
+    rosWebService.executePlan(action);
   }
 
   self.deleteTask = (task,tasks) => {
@@ -158,4 +150,4 @@ function TasksController($mdDialog, $scope, $mdMenu) {
 
 }
 
-export default [ '$mdDialog', '$scope', TasksController ];
+export default [ '$mdDialog', '$scope', '$mdMenu', 'rosWebService', TasksController ];

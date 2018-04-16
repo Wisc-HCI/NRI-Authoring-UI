@@ -2,7 +2,7 @@
 <md-list dnd-list="$ctrl.things" dnd-allowed-types="['thing']" >
 
   <!-- List of Things -->
-  <md-list-item ng-repeat="thing in $ctrl.things | unique: 'name'"
+  <md-list-item class="sidebar-item" ng-repeat="thing in $ctrl.things | unique: 'name'"
         dnd-draggable="thing"
         dnd-type="thing.type"
         dnd-moved="$ctrl.things.splice($index, 1)"

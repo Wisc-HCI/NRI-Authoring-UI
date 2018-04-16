@@ -8,28 +8,6 @@ var position = {
 
 var physicalTherbligs = [
     {
-      name: 'Pick and Drop',
-      type: 'physical',
-      parameters: [
-        position,
-        { name: 'Orientation',
-          val: ''
-        } ,
-        {
-          name: 'Angle',
-          val: '',
-        },
-        {
-          name: 'Arm',
-          val: '',
-        },
-      ],
-      thing: {},
-      constraints: ["","Transport Empty","Release Load", "Position"],
-      obtainThing: true,
-      hasThing: false,
-    },
-    {
       name: 'Transport Empty',
       type: 'physical',
       parameters: [
@@ -118,6 +96,7 @@ var physicalTherbligs = [
      obtainThing: false,
      hasThing: true,
     },
+    /*
     {
       name: 'Position',
       type: 'physical',
@@ -146,6 +125,7 @@ var physicalTherbligs = [
         },
       ],
     },
+    */
     {
       name: 'Rest',
       type: 'physical',

@@ -1,0 +1,110 @@
+﻿[
+{
+    "name": "Test Plan",
+    "therbligsList": [
+    {
+        "name": "Transport Empty",
+        "type": "physical",
+        "parameters": [
+        {
+            "name": "Position X",
+            "type": "position",
+            "val": "-0.269933434482, -0.0314958877548, 0.0771934339673"
+        },
+        {
+            "name": "Orientation",
+            "val": "-0.254251246904,0.486573826796, 0.631751635222, 0.54725870109"
+        },
+        {
+            "name": "Angle",
+            "val": ""
+        },
+        {
+            "name": "Arm",
+            "val": ""
+        }]
+    },
+    {
+        "name": "Grasp",
+        "type": "physical",
+        "parameters": [
+        {
+            "name": "Effort",
+            "val": "50"
+        },
+        {
+            "name": "Arm",
+            "val": ""
+        }],
+        "thing":
+        {
+            "name": "A",
+            "parameters": [
+            {
+                "name": "Thing Position (X, Y, Z)",
+                "val": ""
+            }],
+            "type": "thing",
+            "$$hashKey": "object:96"
+        },
+        "$$hashKey": "object:244"
+    },
+    {
+        "name": "Transport Loaded",
+        "type": "physical",
+        "parameters": [
+        {
+            "name": "Position Y",
+            "type": "position",
+            "val": "0.329154066699, 0.296416884308, 0.180804791474",
+            "$$hashKey": "object:114"
+        },
+        {
+            "name": "Orientation",
+            "val": "-0.565298852724, 0.0472695498383, 0.764927522345, 0.305104379394"
+        },
+        {
+            "name": "Angle",
+            "val": ""
+        },
+        {
+            "name": "Arm",
+            "val": ""
+        }],
+        "thing":
+        {
+            "name": "A",
+            "parameters": [
+            {
+                "name": "Thing Position (X, Y, Z)",
+                "val": ""
+            }],
+            "type": "thing",
+            "$$hashKey": "object:96"
+        },
+        "$$hashKey": "object:300"
+    },
+    {
+        "name": "Release Load",
+        "type": "physical",
+        "parameters": [
+        {
+            "name": "Arm",
+            "val": ""
+        }],
+        "thing":
+        {
+            "name": "A",
+            "parameters": [
+            {
+                "name": "Thing Position (X, Y, Z)",
+                "val": ""
+            }],
+            "type": "thing",
+            "$$hashKey": "object:96"
+        },
+        "$$hashKey": "object:356"
+    }],
+    "type": "macro",
+    "$$hashKey": "object:391"
+}]

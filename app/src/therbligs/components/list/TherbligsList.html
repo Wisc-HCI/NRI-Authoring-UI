@@ -4,7 +4,7 @@
 <md-list dnd-list="$ctrl.therbligs" dnd-allowed-types="$ctrl.allowedTypes">
 
   <!-- List of Therbligs -->
-  <md-list-item class="therblig-action" ng-repeat="therblig in $ctrl.therbligs | unique: 'name'"
+  <md-list-item class="sidebar-item" ng-repeat="therblig in $ctrl.therbligs | unique: 'name'"
         dnd-draggable="therblig"
         dnd-type="therblig.type"
         dnd-moved="$ctrl.therbligs.splice($index, 1)"

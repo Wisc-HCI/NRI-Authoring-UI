@@ -11,7 +11,7 @@ import ROSController from 'src/ros';
 
 function AppController(TherbligsDataService, TaskCardsDataService,
   ThingsDataService, $mdSidenav, $mdDialog, $scope, $http, FileSaver, Blob, Upload,
-  $timeout, PositionsDataService, MacrosDataService) {
+  $timeout, PositionsDataService, MacrosDataService,rosWebService) {
   var self = this;
   var url;
 
@@ -71,47 +71,6 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   // *********************************
   // Internal methods
   // *********************************
-
-  //testing emitting
-  $scope.$on("testROS", function(event, args){
-    alert("testROS");
-  });
-
-  $scope.$on("getPosition", function(event, args){
-    var data, config;
-    var position;
-    data = args;
-    var URL = 'ws://10.140.169.116:9090'
-    position = connectROS(URL);
-    position = '1 2 3';
-    $scope.$root.$broadcast('returnPosition',position);
-
-    /*
-    $http.post('/performROSAction', data, config)
-    .success(function (data, status, headers, config) {
-        $scope.$root.$broadcast('returnPosition',data);
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error");
-    });
-    */
-  });
-
-  $scope.$on("executePlan", function(event, args){
-    console.log(JSON.stringify(args));
-    
-    var data, config;
-    var data = args;
-
-    $http.post('/performROSAction', data, config)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error");
-    });
-  });
-
   // Therblig Task Modal Variables
   var therbligTasks = [];
   var taskToEdit = {};
@@ -169,7 +128,8 @@ function AppController(TherbligsDataService, TaskCardsDataService,
  /*
   * Check ROS
   */
-  self.checkROS = () => {
+  self.checkROS = () => {  
+    
     console.log("checking ROS...")
     
     var data,config;
@@ -182,28 +142,15 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     .error(function (data, status, header, config) {
         console.log("Error");
     });
+
   };
 
-  self.connectROS = () => {
-    url = prompt("Enter the address of the ROS server to connect to: ");
-    
-    connectROS(url);
+  self.turnOnForce = () => {
+    rosWebService.turnOnForceCtrl();
   };
-
-  /*
-  * Get Position
-  */
-  self.getPosition = () => {
-    var data,config;
-    data = {"Action":"GetPosition"};
-
-    $http.post('/performROSAction', data, config)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error");
-    });
+  
+  self.turnOffForce = () => {
+    rosWebService.turnOffForceCtrl();
   };
 
   /*
@@ -333,5 +280,5 @@ function AppController(TherbligsDataService, TaskCardsDataService,
 
 export default ['TherbligsDataService', 'TaskCardsDataService',
   'ThingsDataService','$mdSidenav', '$mdDialog', '$scope', '$http', 'FileSaver', 'Blob',
-  'Upload', '$timeout', 'PositionsDataService', 'MacrosDataService',
+  'Upload', '$timeout', 'PositionsDataService', 'MacrosDataService', 'rosWebService',
   AppController];

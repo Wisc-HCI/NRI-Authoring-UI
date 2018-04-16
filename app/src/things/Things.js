@@ -5,7 +5,7 @@ import ThingsDataService from 'src/things/services/ThingsDataService';
 import ThingsList from 'src/things/components/ThingsList';
 
 export default angular
-  .module("things", ['ngMaterial'])
+  .module("things", ['ngMaterial', 'rosService'])
   .controller("ThingsController", ThingsController)
   .component(ThingsList.name, ThingsList.config)
   .service("ThingsDataService", ThingsDataService);

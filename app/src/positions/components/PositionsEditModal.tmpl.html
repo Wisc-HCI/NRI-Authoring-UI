@@ -4,7 +4,7 @@
     <!-- Header -->
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Edit Position</h2>
+        <h2>Edit Location</h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close dialog" 
           ng-click="cancel()">
@@ -20,7 +20,7 @@
           <div class="md-inline-form">
             <md-input-container class="md-icon-float md-block">
           <!-- Use floating label instead of placeholder -->
-              <label>Position Name</label>
+              <label>Location Name</label>
               <md-icon class="name"></md-icon>
               <input ng-model="position.name" type="text" placeholder="{{ position.name }}"
                 md-autofocus ng-keyup="$event.keyCode == 13 && cancel()">

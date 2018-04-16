@@ -10,6 +10,17 @@ html, body {
   padding: 0px;
 }
 
+/* Console */
+.console {
+  position: relative;
+}
+
+/* Workspace */
+.workspace {
+  position: relative;
+  max-height: : 95%;
+}
+
 /* Toolbar area */
 
 .menu {
@@ -25,11 +36,11 @@ md-toolbar h1 {
 }
 
 /* Sidenav area */
-.therblig-action {
+.sidebar-item {
   transition: all .2s ease-in-out;
 }
 
-.therblig-action:hover {
+.sidebar-item:hover {
   transform: scale(1.1);
 }
 
@@ -99,7 +110,11 @@ md-button.menuBtn > md-icon {
   max-width: 500px;
 }
 
+/*primary console area*/
+
+
 md-button 
+
 
 /* Utils */
 

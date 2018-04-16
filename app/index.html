@@ -14,9 +14,7 @@
   <link rel="stylesheet" href="./assets/app.css"/>
 
 </head>
-
 <body ng-cloak layout="column" ng-controller="AppController as app">
-
   <!-- Container #1: Header Toolbar -->
   <md-toolbar layout="row" class="md-toolbar-tools">
     <md-button class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()"
@@ -29,10 +27,24 @@
         <md-icon md-menu-origin="" md-svg-icon="../assets/svg/ic_more_vert_white_24px.svg"></md-icon>
       </md-button>
       <md-menu-content width="4">
+        <!--
         <md-menu-item>
           <md-button class="md-button" ng-click="app.checkROS()" aria-label="check">
             <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
             Check ROS
+          </md-button>
+        </md-menu-item>
+        !-->
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.turnOnForce()" aria-label="check">
+            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
+            Turn on Force Control
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.turnOffForce()" aria-label="check">
+            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
+            Turn off Force Control
           </md-button>
         </md-menu-item>
         <md-menu-divider></md-menu-divider>
@@ -50,35 +62,10 @@
         </md-menu-item>
       </md-menu-content>
     </md-menu>
-
-    <!-- Check ROS status -->
-    <!--
-    <md-button class="md-button" ng-click="app.getPosition()"
-      aria-label="check">
-      <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
-      Get Position
-    </md-button>
-    <md-button class="md-button" ng-click="app.checkROS()"
-      aria-label="check">
-      <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
-      Check ROS
-    </md-button>
-    <md-button class="md-button" ng-click="app.save(app.tasks)"
-      aria-label="save">
-      <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"></md-icon>
-      Save Plan
-    </md-button>
-    
-    <md-button ngf-select ng-model="file" class="md-button" aria-label="upload">
-      <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"></md-icon>
-      Load Plan
-    </md-button>
-    !-->
   </md-toolbar>
 
   <!-- Container #2: Main Container -->
   <div flex layout="row">
-
     <!-- Container #3: Therblig List-->
     <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
                 md-component-id="left" ng-click="app.toggleList()">
@@ -119,12 +106,10 @@
           <!-- Toolbar for Save and upload -->
           <md-toolbar class="md-accent">
             <div class="md-toolbar-tools">
-
               <md-button ngf-select ng-model="thingsFile" class="md-button" aria-label="Favorite">
                 <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg" style="color: greenyellow;"></md-icon>
                 Upload Things
               </md-button>
-
               <md-button class="md-button" aria-label="More"
               ng-click="app.saveThings(app.things)">
                 <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg" style="color: greenyellow;"></md-icon>
@@ -136,18 +121,18 @@
           </things-list>
         </md-tab>
 
-        <md-tab label="positions">
+        <md-tab label="locations">
           <!-- Toolbar for Save and upload -->
           <md-toolbar class="md-accent">
             <div class="md-toolbar-tools">
 
               <md-button ngf-select ng-model="positionsFile"
                 class="md-button positions-toolbar-button"
-                aria-label="Upload Positions">
+                aria-label="Upload Locations">
                 <md-icon
                   md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
                   style="color: greenyellow;"></md-icon>
-                Upload Positions
+                Upload Locations
               </md-button>
 
               <md-button class="md-button positions-toolbar-button"
@@ -155,7 +140,7 @@
               ng-click="app.savePositions(app.positions)">
                 <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
                   style="color: greenyellow;"></md-icon>
-                Save Positions
+                Save Locations
               </md-button>
             </div>
           </md-toolbar>
@@ -187,7 +172,6 @@
           <macros-list macros="app.macros">
           </macros-list>
         </md-tab>
-
       </md-tabs>
 
       <!-- Custom TherbligList component -->
@@ -200,14 +184,6 @@
         on-selected="app.selectTherblig(therblig)">
       </task-cards>
     </md-content>
-    
-    <!-- Floating FAB-->
-    <!--
-    <md-button class="md-fab"
-      ng-click="app.switchEnv($event, app.Env)" aria-label="Switch Environment">
-      <span style="font-size: 2em;">+</span>
-    </md-button>
-    -->
 
     <!-- Floating FAB-->
     <md-button class="md-fab md-fab-bottom-right md-accent tooltip" 

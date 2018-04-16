@@ -1,12 +1,13 @@
 "use strict";
 
-function position(val){
+function position(val) {
   this.name = 'Position (X, Y, Z)';
   this.val = '';
+}
 
-  /*this.x = x;
-  this.y = y;
-  this.z = z;*/
+function orientation(val) {
+  this.name = 'Orientation (X, Y, Z)';
+  this.val = '';
 }
 
 var things = [
@@ -14,6 +15,7 @@ var things = [
     name: 'A',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -21,6 +23,7 @@ var things = [
     name: 'B',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -28,6 +31,7 @@ var things = [
     name: 'C',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -35,6 +39,7 @@ var things = [
     name: 'D',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -42,6 +47,7 @@ var things = [
     name: 'E',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -49,6 +55,7 @@ var things = [
     name: 'F',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -56,6 +63,7 @@ var things = [
     name: 'G',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   },
@@ -63,6 +71,7 @@ var things = [
     name: 'H',
     parameters: [
       new position(),
+      new orientation(),
     ],
     type: 'thing'
   }
