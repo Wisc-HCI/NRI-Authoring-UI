@@ -91,12 +91,6 @@ function AppController(TherbligsDataService, TaskCardsDataService,
         });
   };
 
-  var originatorEv;
-  self.openMenu = ($mdMenu, ev) => {
-    originatorEv = ev;
-    $mdMenu.open(ev);
-  }
-
   /*
    * Controller for the modal to add tasks
    */
@@ -251,6 +245,12 @@ function AppController(TherbligsDataService, TaskCardsDataService,
       r.readAsText($scope.macrosFile);
     }
   });
+
+  var originatorEv;
+  self.openMenu = ($mdMenu, ev) => {
+    originatorEv = ev;
+    $mdMenu.open(ev);
+  }
 
   /**
    * Select the current therblig

@@ -62,23 +62,86 @@ function initForceControl(turnOn) {
 function rosWebService($http){
 	
 	ros.turnOnForceCtrl = function() {
-		connectToServer();
-	  initForceControl(true);
+
+		var ros = new ROSLIB.Ros({
+    url : 'ws://10.140.169.116:9090'
+		});
+
+	  ros.on('connection', function() {
+	  	console.log('Connected to websocket server.');
+	  });
+
+	  ros.on('error', function(error) {
+	    console.log('Error connecting to websocket server: ', error);
+	  });
+
+	  ros.on('close', function() {
+	    console.log('Connection to websocket server closed.');
+	  });
+
+	  var serviceObj = new ROSLIB.Service({
+	    ros : ros,
+	    name : '/m1n6s300_driver/in/start_force_control',
+	    serviceType : 'kinova_msgs/Start'
+	  });
+
+	  var request = new ROSLIB.ServiceRequest();
+	  serviceObj.callService(request, function(result) {
+	    console.log('Result for service call on ' + serviceObj.name + ': ' + result);
+	  });
 	};
 
 	ros.turnOffForceCtrl = function() {
-		connectToServer();
-	  initForceControl(false);
+		var ros = new ROSLIB.Ros({
+    url : 'ws://10.140.169.116:9090'
+		});
+
+	  ros.on('connection', function() {
+	  	console.log('Connected to websocket server.');
+	  });
+
+	  ros.on('error', function(error) {
+	    console.log('Error connecting to websocket server: ', error);
+	  });
+
+	  ros.on('close', function() {
+	    console.log('Connection to websocket server closed.');
+	  });
+
+	  var serviceObj = new ROSLIB.Service({
+	    ros : ros,
+	    name : '/m1n6s300_driver/in/stop_force_control',
+	    serviceType : 'kinova_msgs/Stop'
+	  });
+
+	  var request = new ROSLIB.ServiceRequest();
+	  serviceObj.callService(request, function(result) {
+	    console.log('Result for service call on ' + serviceObj.name + ': ' + result);
+	  });
 	};
 
 
 	ros.getArmPosition = function() {
 	  return new Promise( function(resolve, reject) {
-	  	connectToServer();
+	  	var ros = new ROSLIB.Ros({
+	    url : 'ws://10.140.169.116:9090'
+			});
+
+		  ros.on('connection', function() {
+		  	console.log('Connected to websocket server.');
+		  });
+
+		  ros.on('error', function(error) {
+		    console.log('Error connecting to websocket server: ', error);
+		  });
+
+		  ros.on('close', function() {
+		    console.log('Connection to websocket server closed.');
+		  });
 
 		  var listener = new ROSLIB.Topic({
 		    ros : ros,
-		    name : '/m1n6s200_driver/out/cartesian_command',
+		    name : '/m1n6s300_driver/out/cartesian_command',
 		    messageType : 'kinova_msgs/KinovaPose'
 		  });
 

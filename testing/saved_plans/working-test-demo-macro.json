@@ -1,0 +1,118 @@
+﻿[
+	{
+		"name":"Test Plan",
+		"therbligsList":[
+         {
+            "name":"Transport Empty",
+            "type":"physical",
+            "parameters":[
+               {
+                  "name":"Position X",
+                  "type":"position",
+                  "val":"0.2453, -0.3035,0.5214",
+                  "$$hashKey":"object:113"
+               },
+               {
+                  "name":"Orientation",
+                  "val":"0.59463, -0.2643, 0.7508, 0.097576"
+               },
+               {
+                  "name":"Angle",
+                  "val":""
+               },
+               {
+                  "name":"Arm",
+                  "val":""
+               }
+            ],
+            "$$hashKey":"object:185"
+         },
+         {
+            "name":"Grasp",
+            "type":"physical",
+            "parameters":[
+               {
+                  "name":"Effort",
+                  "val":"50"
+               },
+               {
+                  "name":"Arm",
+                  "val":""
+               }
+            ],
+            "thing":{
+               "name":"A",
+               "parameters":[
+                  {
+                     "name":"Thing Position (X, Y, Z)",
+                     "val":""
+                  }
+               ],
+               "type":"thing",
+               "$$hashKey":"object:96"
+            },
+            "$$hashKey":"object:244"
+         },
+         {
+            "name":"Transport Loaded",
+            "type":"physical",
+            "parameters":[
+               {
+                  "name":"Position Y",
+                  "type":"position",
+                  "val":"0.2753, -0.3235,0.5614",
+                  "$$hashKey":"object:114"
+               },
+               {
+                  "name":"Orientation",
+                  "val":"0.60463, -0.2643, 0.7508, 0.087576"
+               },
+               {
+                  "name":"Angle",
+                  "val":""
+               },
+               {
+                  "name":"Arm",
+                  "val":""
+               }
+            ],
+            "thing":{
+               "name":"A",
+               "parameters":[
+                  {
+                     "name":"Thing Position (X, Y, Z)",
+                     "val":""
+                  }
+               ],
+               "type":"thing",
+               "$$hashKey":"object:96"
+            },
+            "$$hashKey":"object:300"
+         },
+         {
+            "name":"Release Load",
+            "type":"physical",
+            "parameters":[
+               {
+                  "name":"Arm",
+                  "val":""
+               }
+            ],
+            "thing":{
+               "name":"A",
+               "parameters":[
+                  {
+                     "name":"Thing Position (X, Y, Z)",
+                     "val":""
+                  }
+               ],
+               "type":"thing",
+               "$$hashKey":"object:96"
+            },
+            "$$hashKey":"object:356"
+         }
+],
+		"type":"macro",
+		"$$hashKey":"object:391"
+	}
+]

@@ -52,4 +52,4 @@ export default angular.module( 'nri-authoring-env', [
       return filtered;
     };
   })
-  .controller('AppController', AppController);
+  .controller('AppController', AppController)
