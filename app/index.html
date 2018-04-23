@@ -27,22 +27,36 @@
         <md-icon md-menu-origin="" md-svg-icon="../assets/svg/ic_more_vert_white_24px.svg"></md-icon>
       </md-button>
       <md-menu-content width="4">
-        <!--
+
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.launchROS()" aria-label="launch">
+            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
+            Launch ROS
+          </md-button>
+        </md-menu-item>
+
         <md-menu-item>
           <md-button class="md-button" ng-click="app.checkROS()" aria-label="check">
             <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
             Check ROS
           </md-button>
         </md-menu-item>
-        !-->
+
         <md-menu-item>
-          <md-button class="md-button" ng-click="app.turnOnForce()" aria-label="check">
+          <md-button class="md-button" ng-click="app.exitROS()" aria-label="exit">
+            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
+            Exit ROS
+          </md-button>
+        </md-menu-item>
+        
+        <md-menu-item>
+          <md-button class="md-button" ng-click="app.turnOnForce()" aria-label="turn on force">
             <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
             Turn on Force Control
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button class="md-button" ng-click="app.turnOffForce()" aria-label="check">
+          <md-button class="md-button" ng-click="app.turnOffForce()" aria-label="turn off force">
             <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
             Turn off Force Control
           </md-button>

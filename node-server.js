@@ -9,8 +9,8 @@ var net = require('net');
 var app = express();
 
 
-//var HOST = os.hostname();
-var HOST = '10.140.169.116';
+var HOST = os.hostname();
+//var HOST = '10.140.169.116';
 var PORT = 9999;
 
 app.use(bodyParser.json());
@@ -21,17 +21,32 @@ app.use(express.static(path.join(__dirname, 'app')));
 app.get('/', function(req, res, next) {
   	//Path to the main file
 	res.status(200).sendFile(path.join(__dirname+'../app/index.html')); 
-});
-	
-app.post('/performROSAction', (req, res) => {
-	var rosAction = JSON.stringify(req.body);
-	console.log(rosAction);
+});	
 
+app.post('/launchROS', (req, res) => {
+	handlePost(req,res,'/LaunchROS');
+});
+
+app.post('/checkROS', (req, res) => {
+	handlePost(req,res,'/CheckROSLive');
+});
+
+app.post('/executePlan', (req,res) => {
+	console.log("Executing plan...");
+	handlePost(req,res,'/ExecutePlan');
+});
+
+app.post('/exit', (req,res) => {
+	handlePost(req,res,'/Exit');
+});
+
+function handlePost(req, res, ROSPath){
+	var rosAction = JSON.stringify(req.body);
 
 	var options = {
 		hostname: HOST,
 		port: 9999,
-		path: '',
+		path: ROSPath,
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -54,46 +69,7 @@ app.post('/performROSAction', (req, res) => {
 	// write data to request body
 	req.write(rosAction);
 	req.end();
-
-	
-	// var client = new net.Socket();
-	// client.connect(PORT, HOST, function(){
-	// 	console.log('CONNECTED TO: ' + HOST + ':' + PORT);
- //    // Write a message to the socket as soon as the client is connected
- //    // the server will receive it as message from the client 
-
- //    var rosAction = JSON.stringify(req.body);
- //    //keep the lnegth until we can figure out how to send the data
-	// 	if(client.write(rosAction.length + '\n' + rosAction + '\n')){
-	//     console.log("Data flushed successfully");
-	//   }
-	//   else{
-	//     console.log("Unsuccessful");
- //    }
-
-	// });
-	
-
-
-	// // Add a 'data' event handler for the client socket
-	// // data is what the server sent to this socket
-	// client.on('data', function(data) {
-	//     //console.log('DATA: ' + data);
-	//     res.setHeader('Content-Type', 'application/json');
-	//     /*response has to be in the form of a JSON*/
-	    
-	//     res.end(data);
-	//     /*Sending the respone back to the angular Client */
-
-	//     // Close the client socket completely
-	//     client.destroy();
-	// });
-
-	// // Add a 'close' event handler for the client socket
-	// client.on('close', function() {
-	//     console.log('Connection closed');
-	// });
-});
+}
 
 app.listen(8080);
 console.log("Listening on port 8080")

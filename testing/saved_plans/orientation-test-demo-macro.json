@@ -1,0 +1,41 @@
+﻿{
+    "Action": "ExecutePlan",
+    "content": [
+    {
+        "name": "test",
+        "type": "task",
+        "repeat": 0,
+        "therbligList": [
+        {
+            "name": "Transport Empty",
+            "type": "physical",
+            "parameters": [
+            {
+                "name": "Location X",
+                "type": "position",
+                "val": "-0.23927249014377594, 0.2076534777879715, 0.5883245468139648",
+                "$$hashKey": "object:118"
+            },
+            {
+                "name": "Orientation",
+                "val": "-1.645524024963379, -0.5860326290130615, -2.753509283065796",
+                "$$hashKey": "object:494"
+            },
+            {
+                "name": "Angle",
+                "val": "",
+                "$$hashKey": "object:495"
+            },
+            {
+                "name": "Arm",
+                "val": "",
+                "$$hashKey": "object:496"
+            }],
+            "constraints": ["", "Pick and Drop", "Release Loaded"],
+            "obtainThing": false,
+            "hasThing": false,
+            "$$hashKey": "object:315"
+        }],
+        "$$hashKey": "object:231"
+    }]
+}

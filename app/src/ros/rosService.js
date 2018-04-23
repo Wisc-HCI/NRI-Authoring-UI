@@ -59,7 +59,7 @@ function initForceControl(turnOn) {
  *	getArmPosition
  *	executePlan
  */
-function rosWebService($http){
+function rosWebService($http) {
 	
 	ros.turnOnForceCtrl = function() {
 
@@ -157,10 +157,10 @@ function rosWebService($http){
 	ros.executePlan = function(action) {
     var data, config;
     data = action;
-    console.log(JSON.stringify(action));
+    //console.log(JSON.stringify(action));
 
     
-    $http.post('/performROSAction', data, config)
+    $http.post('/executePlan', data, config)
     .success(function (data, status, headers, config) {
         alert(JSON.stringify(data));
     })

@@ -32,6 +32,9 @@
       <md-content layout-padding>
         <div>
             <form name="positionParameterForm" >
+              <md-button class="md-button md-raised md-primary" ng-click="getPosition()" aria-label="check">
+                Get Position
+              </md-button>
               <div layout-gt-sm="row" >
               <md-input-container class="md-block" flex-gt-sm 
                       ng-keyup="$event.keyCode == 13 && cancel()">

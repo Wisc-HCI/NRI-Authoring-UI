@@ -20,6 +20,14 @@ function PositionsController($mdDialog, $scope, rosWebService) {
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
+
+    $scope.getPosition = (ev) => {
+      rosWebService.getArmPosition().then(function(position,) {
+        $scope.position.val = position.X + ", " + position.Y + ", " + position.Z;
+        //$scope.position.parameters[1].val = position.ThetaX + ", " + position.ThetaY + ", " + position.ThetaZ;
+        $scope.$apply();
+      });
+    };
   }
 }
 
