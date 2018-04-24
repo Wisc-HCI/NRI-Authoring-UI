@@ -1,17 +1,13 @@
-﻿{
-    "Action": "ExecutePlan",
-    "content": [
+﻿[
     {
         "name": "test",
-        "type": "task",
-        "repeat": 0,
-        "therbligList": [
+        "therbligsList": [
         {
             "name": "Transport Empty",
             "type": "physical",
             "parameters": [
             {
-                "name": "Location X",
+                "name": "Destination X",
                 "type": "position",
                 "val": "-0.23927249014377594, 0.2076534777879715, 0.5883245468139648",
                 "$$hashKey": "object:118"
@@ -36,6 +32,7 @@
             "hasThing": false,
             "$$hashKey": "object:315"
         }],
+        "type":"macro",
         "$$hashKey": "object:231"
-    }]
-}
+    }
+]
