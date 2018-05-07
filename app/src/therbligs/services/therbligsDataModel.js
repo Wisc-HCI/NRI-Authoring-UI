@@ -83,7 +83,6 @@ var physicalTherbligs = [
       ],
      thing: {},
     },
-    /*
     {
       name: 'Position',
       type: 'physical',
@@ -98,6 +97,7 @@ var physicalTherbligs = [
         },
       ],
     },
+    /*
     {
       name: 'Preposition',
       type: 'physical',
