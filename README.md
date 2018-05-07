@@ -1,9 +1,4 @@
 # User interface for the NSF NRI Authoring environment.
-
-** Work in Progress **
-
-Live demo at: http://nri-authoring-ui.herokuapp.com/
-
 ```sh
 # Pre-setup
 brew install node
@@ -31,9 +26,10 @@ npm install
 
 # Run Using
 node node-server.js
+
+# Broswer
+Open your browser and enter the url: https://localhost:8080
 ```
 
 # Notes for testing with mico_master
-1. In node-server.js, update host name and local port to your local host name and the port you want to test on.
-2. The application will break if mico_master is not running
-3. If updating the JSON object, update the length variable as well. The python server will expect a length + object.
+In node-server.js, the default host name and local port will be local host and port 9999. If you want to access another computer, update the host name to that computer's corresponding IP address and port number.
