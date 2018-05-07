@@ -9,7 +9,7 @@ The Authoring environment is set up as follows:
 3 - Add Task Button
 4 - Menu
 
-
+[Authoring Environment] (docs/authoring\ environment.png)
 
 ## Side Bar
 
