@@ -13,7 +13,36 @@ The Authoring environment is set up as follows:
 
 ## Side Bar
 
+This portion of the authoring environment consists of the following tabs:
+- Therbligs
+- Things
+- Destinations
+- Macros
 
+###Therbligs
+
+Therbligs fall in one of 3 categories: Physical, Cognitive, and Physical and Cognitive
+
+Physical Therbligs include:
+- Transport Empty
+- Grasp
+- Transport Loaded
+- Release Load
+- Hold
+- Rest
+- Position
+
+Cognitive Therbligs include:
+- Search
+- Find
+- Select
+- Inspect
+- Plan
+
+Physical and Cognitive Therbligs include:
+- Assemble
+- Disassemble
+- Use 
 
 
 ```sh
