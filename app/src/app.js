@@ -16,6 +16,24 @@ import Positions from 'src/positions/Positions';
 import Macros from 'src/macros/Macros';
 import rosService from 'src/ros/rosService'
 
+/*
+// overwrite the console logger
+(function () {
+    if (!console) {
+        console = {};
+    }
+    var old = console.log;
+    var logger = document.getElementById('logger');
+    console.log = function (message) {
+        if (typeof message == 'object') {
+            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '<br />';
+        } else {
+            logger.innerHTML += message + '<br />';
+        }
+    }
+})();
+*/
+
 export default angular.module( 'nri-authoring-env', [
     'ngMaterial',
     'dndLists',

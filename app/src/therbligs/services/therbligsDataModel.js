@@ -24,9 +24,6 @@ var physicalTherbligs = [
           val: '',
         },
       ],
-      constraints: ["","Pick and Drop", "Release Loaded"],
-      obtainThing: false,
-      hasThing: false,
     },
     {
       name: 'Grasp',
@@ -41,9 +38,6 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
-     constraints: ["", "Transport Empty", "Pick and Drop", "Position", "Release Loaded"],
-     obtainThing: true,
-     hasThing: true,
     },
     {
       name: 'Transport Loaded',
@@ -63,9 +57,6 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
-     constraints: ["Grasp", "Hold"],
-     obtainThing: false,
-     hasThing: true,
     },
     {
       name: 'Release Load',
@@ -77,8 +68,6 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
-     constraints: ["Transport Loaded", "Hold"],
-     hasThing: false,
     },
     {
       name: 'Hold',
@@ -93,8 +82,6 @@ var physicalTherbligs = [
         } ,
       ],
      thing: {},
-     obtainThing: false,
-     hasThing: true,
     },
     /*
     {

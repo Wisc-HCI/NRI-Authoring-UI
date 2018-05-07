@@ -2,17 +2,17 @@
 
 var positions = [
   {
-    name: "Location X",
+    name: "Destination X",
     type: "position",
     val: '3, 4, 5'
   },
   {
-    name: "Location Y",
+    name: "Destination Y",
     type: "position",
     val: '2,3,4'
   },
   {
-    name: "Location Z",
+    name: "Destination Z",
     type: "position",
     val: '5,6,3'
   }

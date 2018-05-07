@@ -34,9 +34,12 @@ function ThingsController($mdDialog, $scope, rosWebService) {
     };
 
     $scope.getPosition = (ev) => {
-      rosWebService.getArmPosition().then(function(position,) {
-        $scope.thing.parameters[0].val = position.X + ", " + position.Y + ", " + position.Z;
-        $scope.thing.parameters[1].val = position.ThetaX + ", " + position.ThetaY + ", " + position.ThetaZ;
+      rosWebService.getArmPosition().then(function(position) {
+        var str = position.data;
+        var data = str.split(" ");
+
+        $scope.thing.parameters[0].val = data[0] + ", " + data[1] + ", " + data[2];
+        $scope.thing.parameters[1].val = data[3] + ", " + data[4] + ", " + data[5] + "," + data[6];
         $scope.$apply();
       });
     };

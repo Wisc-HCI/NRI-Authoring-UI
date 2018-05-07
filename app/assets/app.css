@@ -2,6 +2,10 @@
   display: none;
 }
 
+.logger {
+  position: relative;
+}
+
 html, body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;

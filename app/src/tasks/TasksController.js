@@ -132,13 +132,27 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
     };
   }
 
+  self.dropNonTaskCallBack = (item) => {
+    console.log("dropped non task call back");
+    return false;
+  }
+
   /*
    * Drop callback for Task TherbligsList
    */
   self.dropCallBack = (index, item, external, type, therbligsList) => {    
     if(type == "physical" || type == "cognitive" || type == "cognitivePhysical") {
-      if(validConstraint(item,index, therbligsList)) return item;
       
+      /*
+      var prop = 'thing';
+      if(item.hasOwnProperty(prop)){
+        if((index > 0) && (therbligsList[index-1].hasOwnProperty(prop))){
+          var thing = therbligsList[index-1].thing;
+          item.thing = thing;
+        }
+      }*/
+
+      return item;    
       return false;
     } else {
       item.therbligsList.forEach(function(entry) {

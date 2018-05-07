@@ -3,7 +3,8 @@
 
     <!-- Drag and Drop list of Tasks -->
       <div layout="row" dnd-list="$ctrl.tasks"
-        dnd-horizontal-list="true" dnd-allowed-types="['task']">
+        dnd-drop="$ctrl.dropNonTaskCallBack(item)"
+        dnd-horizontal-list="true" dnd-allowed-types="['task','physical']">
       <div class="parent" layout="column" ng-repeat="task in $ctrl.tasks" flex
           dnd-draggable="task"
           dnd-type="task.type"

@@ -9,8 +9,8 @@ var net = require('net');
 var app = express();
 
 
-var HOST = os.hostname();
-//var HOST = '10.140.169.116';
+//var HOST = os.hostname();
+var HOST = '10.140.169.116';
 var PORT = 9999;
 
 app.use(bodyParser.json());
@@ -24,6 +24,7 @@ app.get('/', function(req, res, next) {
 });	
 
 app.post('/launchROS', (req, res) => {
+	console.log("LanchROS");
 	handlePost(req,res,'/LaunchROS');
 });
 
@@ -57,10 +58,16 @@ function handlePost(req, res, ROSPath){
 	var req = http.request(options, function(res) {
 		console.log('Status: ' + res.statusCode);
 	  console.log('Headers: ' + JSON.stringify(res.headers));
+	  
+
 	  res.setEncoding('utf8');
 	  res.on('data', function (body) {
 	    console.log('Body: ' + body);
 	  });
+	});
+
+	req.on('success', function(e) {
+		console.log("success: " + e.message);
 	});
 
 	req.on('error', function(e) {

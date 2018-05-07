@@ -123,6 +123,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   self.checkROS = () => {      
     var data,config;
     data = {"Action":"CheckROSLive"};
+    console.log("checking ros");
     $http.post('/checkROS', data, config)
     .success(function (data, status, headers, config) {
         alert(JSON.stringify(data));
@@ -130,7 +131,6 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     .error(function (data, status, header, config) {
         console.log("Error");
     });
-
   };
 
   self.launchROS = () => {      
@@ -144,7 +144,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     });
   };
 
-  self.exitROS = () => {      
+  self.exit = () => {      
     var data,config;
     $http.post('/exit', data, config)
     .success(function (data, status, headers, config) {

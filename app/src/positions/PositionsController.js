@@ -22,9 +22,11 @@ function PositionsController($mdDialog, $scope, rosWebService) {
     };
 
     $scope.getPosition = (ev) => {
-      rosWebService.getArmPosition().then(function(position,) {
-        $scope.position.val = position.X + ", " + position.Y + ", " + position.Z;
-        //$scope.position.parameters[1].val = position.ThetaX + ", " + position.ThetaY + ", " + position.ThetaZ;
+      rosWebService.getArmPosition().then(function(position) {
+        var str = position.data;
+        var data = str.split(" ");
+        $scope.position.val = data[0] + ", " + data[1] + ", " + data[2];
+        console.log("Orientation (not added): " + data[3] + ", " + data[4] + ", " + data[5] + ", " + data[6]); 
         $scope.$apply();
       });
     };

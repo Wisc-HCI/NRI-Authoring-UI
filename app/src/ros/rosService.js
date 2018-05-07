@@ -141,13 +141,18 @@ function rosWebService($http) {
 
 		  var listener = new ROSLIB.Topic({
 		    ros : ros,
-		    name : '/m1n6s300_driver/out/cartesian_command',
+		    name : '/end_effector_position',
+		    messageType : 'std_msgs/String'
+		    /*
+				name : '/m1n6s300_driver/out/cartesian_command',
 		    messageType : 'kinova_msgs/KinovaPose'
+		    */
 		  });
 
+		  console.log("calling get position");
 		  listener.subscribe(function(message) {
 		    listener.unsubscribe();
-		    //console.log(message);
+		    console.log(message);
 		    resolve(message);
 		  });
 	  });
@@ -157,7 +162,7 @@ function rosWebService($http) {
 	ros.executePlan = function(action) {
     var data, config;
     data = action;
-    //console.log(JSON.stringify(action));
+    console.log(JSON.stringify(action));
 
     
     $http.post('/executePlan', data, config)
