@@ -1,4 +1,21 @@
 # User interface for the NSF NRI Authoring environment.
+
+This is the font end component of the NSF NRI AUthoring enviornment. Please read the article, 'Parametrization of “Therbligs”  for Specifying Manufacturing Tasks for Collaborative Robots' for a better understanding of this project.
+
+The Authoring environment is set up as follows:
+
+1 - Side Bar
+2 - Task Environment
+3 - Add Task Button
+4 - Menu
+
+
+
+## Side Bar
+
+
+
+
 ```sh
 # Pre-setup
 brew install node
