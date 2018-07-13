@@ -100,6 +100,10 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
 
   function EditModalController($scope, $mdDialog) {
     $scope.therblig = therbligToEdit;
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
     $scope.done = function() {
       $mdDialog.cancel();
     };
@@ -162,25 +166,6 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
       $mdDialog.cancel();
     };
   }
-
-  /*
-   * @param1 event service variable
-   * @param2 task that needs to be edited
-   * @param3 list of tasks that the task that needs to be edited is in
-   */
-  self.assignTaskTwo = (ev, task, tasks, macros) => {
-    taskToEdit = task;
-    taskList = tasks;
-    macrosToEdit = macros;
-    $mdDialog.show({
-          controller: AssignTaskControllerTwo,
-          templateUrl: 'src/tasks/components/AssignTaskModal2.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:false,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        });
-  };
 
   function AssignTaskControllerTwo($scope, $mdDialog) {
     $scope.task = taskToEdit;
