@@ -3,23 +3,37 @@
 function PositionsController($mdDialog, $scope, rosWebService) {
   var self = this;
   var positionToEdit;
+
   self.editPosition = (ev, position) => {
     positionToEdit = position;
+    
+
     $mdDialog.show({
           controller: EditPositionController,
           templateUrl: 'src/positions/components/PositionsEditModal.tmpl.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose:true,
+          clickOutsideToClose:false,
           fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        });
+    }).then(function(successData) {
+      // not implemeneted
+    }, function(cancelData) {
+      // not implemented
+    });
   };
 
   function EditPositionController($mdDialog, $scope, rosWebService) {
     $scope.position = positionToEdit;
-    $scope.cancel = function() {
-      $mdDialog.cancel();
+    var ogPosition = Object.assign({}, positionToEdit);
+
+    $scope.done = function() {
+      $mdDialog.hide();
     };
+
+    $scope.cancel = function(){
+      
+      $mdDialog.cancel(ogPosition);
+    }
 
     $scope.getPosition = (ev) => {
       rosWebService.getArmPosition().then(function(position) {

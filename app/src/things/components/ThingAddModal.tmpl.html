@@ -1,10 +1,9 @@
 <md-dialog>
-  <form name="editThing" ng-cloak>
+	 <form name="thingAdd" ng-cloak>
 
-    <!-- Header -->
-    <md-toolbar>
+	 	 <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Edit Thing</h2>
+        <h2>Add Thing</h2>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="Close dialog" 
           ng-click="cancel()">
@@ -13,8 +12,8 @@
         </md-button>
       </div>
     </md-toolbar>
-
-    <!-- Input Area -->
+	
+		<!-- Input Area -->
     <md-dialog-content>
       <div class="md-dialog-content">
         <div class="md-inline-form">
@@ -48,10 +47,9 @@
 
       <md-content layout-padding>
         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-          <md-button class="md-raised md-primary" ng-click="cancel()" ng-disabled="editThing.$invalid">Done</md-button>
+          <md-button class="md-raised md-primary" ng-click="done()" ng-disabled="thingAdd.$invalid">Done</md-button>
           </md-button>
         </section>
       </md-content>
     </md-dialog-content>
-  </form>
 </md-dialog>

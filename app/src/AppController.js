@@ -9,7 +9,7 @@
 
 function AppController(TherbligsDataService, TaskCardsDataService,
   ThingsDataService, $mdSidenav, $mdDialog, $scope, $http, FileSaver, Blob, Upload,
-  $timeout, PositionsDataService, MacrosDataService,rosWebService) {
+  $timeout, PositionsDataService, MacrosDataService,rosWebService, loggerLogService, optimizerParser) {
   var self = this;
   var url;
 
@@ -94,7 +94,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   /*
    * Controller for the modal to add tasks
    */
-  function AddTaskController($scope, $mdDialog,$mdMenu) {
+  function AddTaskController($scope, $mdDialog,$mdMenu,loggerLogService) {
     // Once done, close modal and add the task to the task list
     $scope.done = function() {
       $mdDialog.cancel();
@@ -104,11 +104,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     // Create new task
     currentTask =
     {
-      name: '',
-      type: 'task',
-      repeat: 0,
-      therbligList: [
-      ],
+      name: '', type: 'task', repeat: 0,therbligList: [],
     };
     $scope.task = currentTask;
 
@@ -117,10 +113,19 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     };
   }
 
- /*
-  * Check ROS
-  */
-  self.checkROS = () => {      
+  // *********************************
+  // Main Menu Options
+  // *********************************
+  var originatorEv;
+  self.openMenu = ($mdMenu, ev) => {
+    originatorEv = ev;
+    $mdMenu.open(ev);
+  }
+
+  self.checkROS = () => {
+    console.log("Checking ROS...... (not really)");
+
+    /*      
     var data,config;
     data = {"Action":"CheckROSLive"};
     console.log("checking ros");
@@ -131,9 +136,13 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     .error(function (data, status, header, config) {
         console.log("Error");
     });
+    */
   };
 
   self.launchROS = () => {      
+    console.log("Launching ROS........ (not really)");
+
+    /*
     var data,config;
     $http.post('/launchROS', data, config)
     .success(function (data, status, headers, config) {
@@ -141,7 +150,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     })
     .error(function (data, status, header, config) {
         console.log("Error");
-    });
+    });*/
   };
 
   self.exit = () => {      
@@ -162,6 +171,26 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   
   self.turnOffForce = () => {
     rosWebService.turnOffForceCtrl();
+  };
+
+  self.optimize = (tasksToOptimize) => {
+    //tasksToOptimize.forEach(function(task) {});
+    var data,config;
+    //var jsonTasks = angular.toJson( tasksToOptimize );
+    //var data = jsonTasks;
+
+    data = optimizerParser.tasksToPDDL(tasksToOptimize);
+    console.log(data);
+    
+    /*    
+    $http.post('http://10.130.229.199:8888/OptimizePlan',data)
+    .success(function (data, status, headers, config) {
+        alert(JSON.stringify(data));
+    })
+    .error(function (data, status, header, config) {
+        console.log("Error, please check how you're making the get request.");
+    });
+    */
   };
 
   /*
@@ -265,12 +294,6 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     }
   });
 
-  var originatorEv;
-  self.openMenu = ($mdMenu, ev) => {
-    originatorEv = ev;
-    $mdMenu.open(ev);
-  }
-
   /**
    * Select the current therblig
    * @param menuId
@@ -286,6 +309,93 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     $mdSidenav('left').toggle();
   };
 
+  self.addDestination = (ev) => {
+      $mdDialog.show({
+      controller: AddDestinationController,
+      templateUrl: 'src/positions/components/PositionsEditModal.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:false,
+      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function(successData) {
+      self.positions.push(successData);
+    }, function(cancelData) {
+      // not implemented
+    });
+  }
+
+  function AddDestinationController($scope, $mdDialog, $mdMenu) {
+    
+    var position = {
+      name: '',
+      type: "position",
+      val: ''
+    }
+
+    $scope.position = position;
+
+    $scope.done = function() {
+      $mdDialog.hide(position);
+    };
+
+    $scope.cancel = () => {
+      $mdDialog.cancel();
+    };
+  }
+
+  /*
+   *
+   */
+  self.addThing = (ev) => {
+    $mdDialog.show({
+      controller: AddThingController,
+      templateUrl: 'src/things/components/ThingAddModal.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:false,
+      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function(successData) {
+      self.things.push(successData);
+    }, function(cancelData) {
+      // not implemented
+    });
+  };
+
+  function AddThingController($scope, $mdDialog,$mdMenu) {
+    
+    /*Fix this later*/
+    function position(val) {
+      this.name = 'Position (X, Y, Z)';
+      this.val = '';
+    }
+
+    function orientation(val) {
+      this.name = 'Orientation (X, Y, Z)';
+      this.val = '';
+    }
+
+    function thingObj(name) {
+      this.name = name;
+
+      this.parameters = [
+        new position(),
+        new orientation(),
+      ];
+      this.type = 'thing';
+    }
+
+    var newThing = new thingObj('');
+    $scope.thing = newThing;
+
+    $scope.done = function() {
+      $mdDialog.hide(newThing);
+    };
+
+    $scope.cancel = () => {
+      $mdDialog.cancel();
+    };
+  }
+
   $scope.btnToggle = function($event){
     var cName = $event.target.className;
     if (cName === "md-primary md-raised md-button md-ink-ripple")
@@ -297,5 +407,5 @@ function AppController(TherbligsDataService, TaskCardsDataService,
 
 export default ['TherbligsDataService', 'TaskCardsDataService',
   'ThingsDataService','$mdSidenav', '$mdDialog', '$scope', '$http', 'FileSaver', 'Blob',
-  'Upload', '$timeout', 'PositionsDataService', 'MacrosDataService', 'rosWebService',
+  'Upload', '$timeout', 'PositionsDataService', 'MacrosDataService', 'rosWebService', 'loggerLogService', 'optimizerParser',
   AppController];

@@ -1,5 +1,5 @@
 <md-dialog>
-  <form ng-cloak>
+  <form name="editPosition" ng-cloak>
 
     <!-- Header -->
     <md-toolbar>
@@ -23,7 +23,7 @@
               <label>Location Name</label>
               <md-icon class="name"></md-icon>
               <input ng-model="position.name" type="text" placeholder="{{ position.name }}"
-                md-autofocus ng-keyup="$event.keyCode == 13 && cancel()">
+                md-autofocus ng-keyup="$event.keyCode == 13 && cancel()" required>
             </md-input-container>      
         </div>
       </div>
@@ -48,7 +48,7 @@
 
       <md-content layout-padding>
         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-          <md-button class="md-raised md-primary" ng-click="cancel()">Done</md-button>
+          <md-button class="md-raised md-primary" ng-click="done()" ng-disabled="editPosition.$invalid">Done</md-button>
           </md-button>
         </section>
       </md-content>

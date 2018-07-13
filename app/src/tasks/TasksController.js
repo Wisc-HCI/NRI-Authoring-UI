@@ -3,6 +3,10 @@
 function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
   var self = this;
 
+  $scope.data = {
+    assign: false
+  };
+
   // Updates Therblig object
   self.updateTherbligThing = (therblig, thing) => {
     therblig.thing = thing;
@@ -57,9 +61,9 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
    * @param2 therblig that needs to be edited
    * @param3 list of therbligs the therblig to be edited is in
    */
-  self.editTherblig = (ev, therblig, therbligList) => {
+  self.editTherblig = (ev, therblig, therbligsList) => {
     therbligToEdit = therblig;
-    taskTherbligList = therbligList;
+    taskTherbligList = therbligsList;
     $mdDialog.show({
           controller: EditModalController,
           templateUrl: 'src/therbligs/components/edit/EditModal.html',
@@ -96,7 +100,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
 
   function EditModalController($scope, $mdDialog) {
     $scope.therblig = therbligToEdit;
-    $scope.cancel = function() {
+    $scope.done = function() {
       $mdDialog.cancel();
     };
 
@@ -132,9 +136,89 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
     };
   }
 
-  self.dropNonTaskCallBack = (item) => {
-    console.log("dropped non task call back");
-    return false;
+  /*
+   * @param1 event service variable
+   * @param2 task that needs to be edited
+   * @param3 list of tasks that the task that needs to be edited is in
+   */
+  self.assignTask = (ev, task, tasks, macros) => {
+    taskToEdit = task;
+    taskList = tasks;
+    macrosToEdit = macros;
+    $mdDialog.show({
+          controller: AssignTaskController,
+          templateUrl: 'src/tasks/components/AssignTaskModal.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:false,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        });
+  };
+
+  function AssignTaskController($scope, $mdDialog) {
+    $scope.task = taskToEdit;
+    
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  /*
+   * @param1 event service variable
+   * @param2 task that needs to be edited
+   * @param3 list of tasks that the task that needs to be edited is in
+   */
+  self.assignTaskTwo = (ev, task, tasks, macros) => {
+    taskToEdit = task;
+    taskList = tasks;
+    macrosToEdit = macros;
+    $mdDialog.show({
+          controller: AssignTaskControllerTwo,
+          templateUrl: 'src/tasks/components/AssignTaskModal2.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:false,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        });
+  };
+
+  function AssignTaskControllerTwo($scope, $mdDialog) {
+    $scope.task = taskToEdit;
+    
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  function isValid(therblig, index, therbligsList) {
+    var pTherblig, nTherblig, valid;
+
+    valid = true;
+    if(therbligsList.length == 0) return valid;
+    else {
+
+      // inserting into the middle or end
+      if(index != 0 ) {
+
+        // check previous therblig
+        pTherblig = therbligsList[index-1];
+        valid = pTherblig.allowed.indexOf(therblig.name) > -1;
+
+        // check next therblig
+        if(index < therbligsList.length - 1){
+          nTherblig = therbligsList[index];
+          valid = therblig.allowed.indexOf(nTherblig.name) > -1;
+        } 
+
+      } 
+      // inserting into the top of the list
+      else {
+        nTherblig = therbligsList[index];
+        valid = therblig.allowed.indexOf(nTherblig.name) > -1;
+      }
+    }
+    
+    return valid;
   }
 
   /*
@@ -143,17 +227,25 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
   self.dropCallBack = (index, item, external, type, therbligsList) => {    
     if(type == "physical" || type == "cognitive" || type == "cognitivePhysical") {
       
-      /*
+      if(!isValid(item,index,therbligsList)) return false
+      
       var prop = 'thing';
       if(item.hasOwnProperty(prop)){
-        if((index > 0) && (therbligsList[index-1].hasOwnProperty(prop))){
+        if((index > 0) && (therbligsList[index-1].hasOwnProperty(prop))) {
           var thing = therbligsList[index-1].thing;
-          item.thing = thing;
+          Object.assign(item.thing, thing);
         }
-      }*/
+      }
+
+      if(item.parameters[0].hasOwnProperty('type')){
+        if((index > 0) && (therbligsList[index-1].parameters[0].hasOwnProperty('type'))) {
+          var position = therbligsList[index-1].parameters[0];
+          Object.assign(item.parameters[0], position);
+        }        
+      }
 
       return item;    
-      return false;
+      //return false;
     } else {
       item.therbligsList.forEach(function(entry) {
         therbligsList.push(entry);

@@ -22,198 +22,36 @@
       <md-icon md-svg-icon="menu"></md-icon>
     </md-button>
     <h2 flex md-truncate>NRI Authoring Environment</h2>
-    <md-menu>
-      <md-button class="md-icon-button" aria-label="Open menu" ng-click="app.openMenu($mdMenu, $event)">
-        <md-icon md-menu-origin="" md-svg-icon="../assets/svg/ic_more_vert_white_24px.svg"></md-icon>
-      </md-button>
-      <md-menu-content width="4">
-
-        <md-menu-item>
-          <md-button class="md-button" ng-click="app.launchROS()" aria-label="launch">
-            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
-            Launch ROS
-          </md-button>
-        </md-menu-item>
-
-        <md-menu-item>
-          <md-button class="md-button" ng-click="app.checkROS()" aria-label="check">
-            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
-            Check ROS
-          </md-button>
-        </md-menu-item>
-
-        <md-menu-item>
-          <md-button class="md-button" ng-click="app.exitROS()" aria-label="exit">
-            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
-            Exit ROS
-          </md-button>
-        </md-menu-item>
-        
-        <md-menu-item>
-          <md-button class="md-button" ng-click="app.turnOnForce()" aria-label="turn on force">
-            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
-            Turn on Force Control
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button class="md-button" ng-click="app.turnOffForce()" aria-label="turn off force">
-            <md-icon md-svg-icon="../assets/svg/ic_android_black_24px.svg"></md-icon>
-            Turn off Force Control
-          </md-button>
-        </md-menu-item>
-        <md-menu-divider></md-menu-divider>
-        <md-menu-item>
-          <md-button class="md-button" ng-click="app.save(app.tasks)" aria-label="save">
-            <md-icon md-svg-icon="../assets/svg/ic_save_black_24px.svg"></md-icon>
-            Save Plan
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ngf-select ng-model="file" class="md-button" aria-label="upload">
-            <md-icon md-svg-icon="../assets/svg/ic_file_upload_black_24px.svg"></md-icon>
-            Load Plan
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
+    <div ng-include="'/src/main/menu.html'"></div>
   </md-toolbar>
 
   <!-- Container #2: Main Container -->
-  <!-- <div id="workspace"> -->
-  <div flex layout="row">
-    <!-- Container #3: Therblig List-->
-    <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
-                md-component-id="left" ng-click="app.toggleList()">
-      <!-- Title -->
-      <md-tabs md-stretch-tabs="auto" md-dynamic-height="true">
-        <md-tab label="therbligs">
-          <br>
-          <div>
-            <md-button class="md-primary md-raised" ng-click="showDetails =! showDetails; btnToggle($event)">Physical</md-button>
-            <therbligs-list ng-show="!showDetails"
-              therbligs="app.physicalTherbligs"
-              allowed-types="['physical']"
-              selected="app.selected"
-              on-selected="app.selectTherblig(therblig)">
-            </therbligs-list>
-          </div>
-          <div>
-            <md-button class="md-primary" ng-click="showDetails2 =! showDetails2; btnToggle($event)">Cognitive</md-button>
-              <therbligs-list ng-show="showDetails2"
-                therbligs="app.cognitiveTherbligs"
-                allowed-types="['congitive']"
-                selected="app.selected"
-                on-selected="app.selectTherblig(therblig)">
-              </therbligs-list>
-          </div>
-          <div>
-            <md-button class="md-primary" ng-click="showDetails3 =! showDetails3; btnToggle($event)">Physical and Cognitive</md-button>
-            <therbligs-list ng-show="showDetails3"
-              therbligs="app.cogPhysTherbligs"
-              allowed-types="['cognitivePhysical']"
-              selected="app.selected"
-              on-selected="app.selectTherblig(therblig)">
-            </therbligs-list>
-          </div>
-        </md-tab>
-
-        <md-tab label="things">
-          <!-- Toolbar for Save and upload -->
-          <md-toolbar class="md-accent">
-            <div class="md-toolbar-tools">
-              <md-button ngf-select ng-model="thingsFile" class="md-button" aria-label="Favorite">
-                <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg" style="color: greenyellow;"></md-icon>
-                Upload Things
-              </md-button>
-              <md-button class="md-button" aria-label="More"
-              ng-click="app.saveThings(app.things)">
-                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg" style="color: greenyellow;"></md-icon>
-                Save Things
-              </md-button>
-            </div>
-          </md-toolbar>
-          <things-list things="app.things">
-          </things-list>
-        </md-tab>
-
-        <md-tab label="destinations">
-          <!-- Toolbar for Save and upload -->
-          <md-toolbar class="md-accent">
-            <div class="md-toolbar-tools">
-
-              <md-button ngf-select ng-model="positionsFile"
-                class="md-button positions-toolbar-button"
-                aria-label="Upload Destination">
-                <md-icon
-                  md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Upload Destinations
-              </md-button>
-
-              <md-button class="md-button positions-toolbar-button"
-                         aria-label="Save Positions"
-              ng-click="app.savePositions(app.positions)">
-                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Save Destinations
-              </md-button>
-            </div>
-          </md-toolbar>
-          <positions-list positions="app.positions">
-          </positions-list>
-        </md-tab>
-
-        <md-tab label="macros">
-          <!-- Toolbar for Save and upload -->
-          <md-toolbar class="md-accent">
-            <div class="md-toolbar-tools">
-
-              <md-button ngf-select ng-model="macrosFile"
-                class="md-button" aria-label="Upload Macros">
-                <md-icon
-                  md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Upload Macros
-              </md-button>
-
-              <md-button class="md-button" aria-label="Save Macros"
-              ng-click="app.saveMacros(app.macros)">
-                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Save Macros 
-              </md-button>
-            </div>
-          </md-toolbar>
-          <macros-list macros="app.macros">
-          </macros-list>
-        </md-tab>
-      </md-tabs>
-
-      <!-- Custom TherbligList component -->
-    </md-sidenav>
-
-
+  <div flex layout="row" style="height:85%;">
+    <!-- Container #3: Sidebar: Therblig List, Position, Destinations, Macros-->
+    <div ng-include="'/src/main/sidebar.html'"></div>
     <!-- Container #4: Task  Cards -->
     <md-content flex id="content" style="background-color: #f8f6f6;">
+      <!-- Floating FAB-->
+      <md-button class="md-fab md-fab-top-right md-primary tooltip" aria-label="ExecutePlan">
+        <md-icon>send</md-icon>
+      </md-button>
           <task-cards tasks="app.tasks" selected="app.selected"
             positions="app.positions" things="app.things" macros="app.macros"
             on-selected="app.selectTherblig(therblig)">
           </task-cards>      
     </md-content>
-
     <!-- Floating FAB-->
     <md-button class="md-fab md-fab-bottom-right md-accent tooltip" 
       ng-click="app.addTask($event, app.tasks)" aria-label="Add Task">
       <md-icon>add</md-icon>
-      <md-tooltip md-direction="bottom" md-visible="true">test</md-tooltip>
     </md-button>
   </div>
 
-<!--
-</div>
-<div id="logger">
-</div>
--->
+  <!-- Container #3: Console -->
+  <!--
+  <div id="logger" flex layout="row" style="height:15%; border-top: 2px solid #dce3ef; overflow-y: scroll;">
+  -->
+  </div>
 
   <script src="./jspm_packages/system.js" type="text/javascript"></script>
   <script src="config.js" type="text/javascript"></script>

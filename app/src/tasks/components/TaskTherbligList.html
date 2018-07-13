@@ -1,0 +1,17 @@
+<md-card-content class="task-card-content">
+  <md-list>
+    <md-list-item ng-repeat="therblig in task.therbligList">
+      <span class="md-button md-raised">
+        <div ng-class="{'selected': therblig === $ctrl.selected}">
+          {{ therblig.name }}
+        </div>
+        <!-- Things 
+        <div layout="row">
+          <div flex style="padding-right: 20px" >
+            {{ therblig.thing.name }}
+          </div>
+        </div> -->
+      </span>
+        </md-list-item>
+    </md-list>
+</md-card-content>

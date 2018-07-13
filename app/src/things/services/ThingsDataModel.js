@@ -11,71 +11,22 @@ function orientation(val) {
   this.val = '';
 }
 
+function thingObj(name) {
+  this.name = name;
+
+  this.parameters = [
+    new position(),
+    new orientation(),
+  ];
+
+  this.type = 'thing';
+}
+
 var things = [
-  {
-    name: 'A',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'B',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'C',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'D',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'E',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'F',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'G',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  },
-  {
-    name: 'H',
-    parameters: [
-      new position(),
-      new orientation(),
-    ],
-    type: 'thing'
-  }
+  new thingObj('A'),
+  new thingObj('B'),
+  new thingObj('C'),
+  new thingObj('D')
 ];
 
 export default { things };

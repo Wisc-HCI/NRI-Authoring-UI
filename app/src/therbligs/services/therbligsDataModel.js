@@ -24,6 +24,8 @@ var physicalTherbligs = [
           val: '',
         },
       ],
+      allowed: ['Rest', 'Grasp'],
+      assign: false,
     },
     {
       name: 'Grasp',
@@ -38,6 +40,8 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
+     allowed: ['Transport Loaded', 'Hold', 'Release Load', 'Position'],
+     assign: false,
     },
     {
       name: 'Transport Loaded',
@@ -57,6 +61,8 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
+     allowed: ['Release Load', 'Position', 'Hold'],
+     assign: false,
     },
     {
       name: 'Release Load',
@@ -68,6 +74,8 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
+     allowed: ['Transport Empty', 'Grasp', 'Rest'],
+     assign: false,
     },
     {
       name: 'Hold',
@@ -82,6 +90,8 @@ var physicalTherbligs = [
         } ,
       ],
      thing: {},
+     allowed: ['Transport Loaded', 'Release Load'],
+     assign: false,
     },
     {
       name: 'Position',
@@ -96,6 +106,8 @@ var physicalTherbligs = [
           val: '',
         },
       ],
+      allowed: ['Transport Loaded', 'Hold', 'Release Load'],
+      assign: false,
     },
     /*
     {
@@ -126,6 +138,8 @@ var physicalTherbligs = [
           val: '',
         },
       ],
+      allowed: ['Transport Empty', 'Grasp'],
+      assign: false,
     },
 ];
 

@@ -1,21 +1,17 @@
 <div class='md-padding task-cards-container flipped' layout="row" flex >
   <div class='flipped'>
-
     <!-- Drag and Drop list of Tasks -->
       <div layout="row" dnd-list="$ctrl.tasks"
-        dnd-drop="$ctrl.dropNonTaskCallBack(item)"
-        dnd-horizontal-list="true" dnd-allowed-types="['task','physical']">
+      dnd-horizontal-list="true" dnd-allowed-types="['task']">
       <div class="parent" layout="column" ng-repeat="task in $ctrl.tasks" flex
           dnd-draggable="task"
           dnd-type="task.type"
           dnd-moved="$ctrl.tasks.splice($index, 1)"
           dnd-effect-allowed="move">
-
         <md-card class="task-cards md-whiteframe-10dp">
-
           <!-- Title -->
           <div layout="row" md-colors="::{backgroundColor: 'default-primary'}">
-            <div flex="90">
+            <div flex>
               <md-card-title class="task-card-title" >
                 {{ task.name }}
               </md-card-title>
@@ -35,13 +31,6 @@
                     <md-menu-divider></md-menu-divider>
                     <md-menu-item>
                       <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
-                        ng-click="$ctrl.testROS()">
-                        <md-icon md-svg-icon="../assets/svg/ic_assignment_black_24px.svg"></md-icon>
-                        Assign Task
-                      </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
                         ng-click="$ctrl.executePlan($event, task)">
                         <md-icon md-svg-icon="../assets/svg/ic_send_black_24px.svg"></md-icon>
                         Execute Task
@@ -56,6 +45,7 @@
                     </md-menu-item>
                   </md-menu-content>
               </md-menu>
+              <md-switch ng-model="data.assign" aria-label="Switch 1"></md-switch>
             </div>
           </div>
 
@@ -85,13 +75,14 @@
                   <div layout="row">
                     <div flex style="padding-right: 20px" >
                       <md-menu>
-                       <!-- Trigger element is a md-button with an icon -->
-                       <md-button class="md-primary md-raised button-text"
-                         ng-click="$mdMenu.open($event)" class="md-icon-button"
-                                                    aria-label="Open sample menu"
-                         ng-show="therblig.hasOwnProperty('thing')">
-                         {{ therblig.thing.name || "Thing"}}
-                       </md-button>
+                        <md-button 
+                          ng-class="{emptyClass: (therblig.thing.name == null), 'md-primary': !(therblig.thing.name == null), 'md-raised': !(therblig.thing.name == null)}"
+                          type="button"
+                          ng-click="$mdMenu.open($event)"
+                          aria-label="Open thing menu"
+                          ng-show="therblig.hasOwnProperty('thing')">
+                          {{ therblig.thing.name || "Thing"}}
+                        </md-button>
                        <md-menu-content>
                          <md-menu-item ng-repeat="thing in $ctrl.things | validThing: $index: task.therbligList">
                            <md-button ng-click="$ctrl.updateTherbligThing(therblig, thing)">
@@ -104,23 +95,30 @@
                     <div flex>
                       <md-menu>
                        <!-- Trigger element is a md-button with an icon -->
-                       <md-button class="md-raised md-accent button-text button-size" 
-                         ng-click="$mdMenu.open($event)" class="md-icon-button" 
-                         aria-label="Open sample menu" 
-                         ng-show="therblig.parameters[0].type === 'position'">
-                         {{ therblig.parameters[0].name || "Landmark X"}} <!-- need to update position to landmark -->
-                       </md-button>
-                       <md-menu-content> 
-                         <md-menu-item ng-repeat="position in $ctrl.positions">
-                           <md-button ng-click="$ctrl.updateTherbligPosition(therblig, position)">
-                             {{ position.name }}
+                      <md-button 
+                        ng-class="{emptyClass: (therblig.parameters[0].name == ''),'md-accent': !(therblig.parameters[0].name == ''), 'md-raised': !(therblig.parameters[0].name == ''), 'button-size': true}"
+                        type="button"
+                        ng-click="$mdMenu.open($event)" 
+                        aria-label="Open destination menu" 
+                        ng-show="therblig.parameters[0].type === 'position'">
+                        {{ therblig.parameters[0].name || "Destination"}}
+                      </md-button>
+                      <md-menu-content> 
+                        <md-menu-item ng-repeat="position in $ctrl.positions">
+                          <md-button ng-click="$ctrl.updateTherbligPosition(therblig, position)">
+                            {{ position.name }}
                            </md-button>
                          </md-menu-item>
                        </md-menu-content>
                       </md-menu>
                     </div>
                   </div>
-
+                  <div layout="row" ng-show="data.assign">
+                    <md-switch ng-model="therblig.assign" aria-label="Switch 1">
+                      <span ng-if="therblig.assign">Human</span>
+                      <span ng-if="!therblig.assign">Robot</span>
+                    </md-switch>
+                  </div>
                 </span>
               </md-list-item>
             </md-list>

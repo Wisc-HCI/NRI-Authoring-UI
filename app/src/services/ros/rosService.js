@@ -162,16 +162,16 @@ function rosWebService($http) {
 	ros.executePlan = function(action) {
     var data, config;
     data = action;
-    console.log(JSON.stringify(action));
+    console.log(angular.toJson(action));
 
-    
+    /*
     $http.post('/executePlan', data, config)
     .success(function (data, status, headers, config) {
         alert(JSON.stringify(data));
     })
     .error(function (data, status, header, config) {
         console.log("Error-unable to execute plan.");
-    });
+    });*/
 	};
 
 	return ros;

@@ -17,7 +17,7 @@ function ThingsController($mdDialog, $scope, rosWebService) {
           templateUrl: 'src/things/components/ThingEditModal.tmpl.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose:true,
+          clickOutsideToClose:false,
           fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
         });
   };

@@ -2,8 +2,14 @@
   display: none;
 }
 
-.logger {
-  position: relative;
+
+.emptyClass {
+  background-color: #d6d6d6 !important;
+  color: black !important;
+}
+
+.notEmptyClass {
+  background-color: red;
 }
 
 html, body {
