@@ -17,7 +17,7 @@ function getTaskListObj(listOfTherbligNames) {
 			taskName = listOfTherbligNames[i][j] + i;
 
 			if(j == 0) preconditions = "none";
-			else preconditions = listOfTherbligNames[i][j-1] + wi;
+			else preconditions = listOfTherbligNames[i][j-1] + i;
 
 			if(listOfTherbligNames[i].length == 1) constraints = "none";
 			else if(j == 0) constraints = "start: path" + i;
@@ -43,8 +43,9 @@ function genericTaskObj(pre, constraint) {
 // @params
 // 	therbligName - name of the therblig
 function convertTherbligNameToPDDLformat(therbligName) {
-	var formatName = therbligName;
-	var delim = '_';
+	var formatName, delim;
+	delim = '_';
+	formatName = therbligName.replace(' ', '_');
 
 	return formatName;
 }
@@ -97,16 +98,34 @@ function getTherbligObjFromName(name, taskList, taskNo) {
 };
 
 function convertFromPlanToTask(planList, actualList) {
+	console.log('planList: ');
+	console.log(planList);
+	//console.log('actualList: ');
+	//console.log(actualList);
+
 	//handle 1 task case
-	var thPlan, therbligName, index, therbligObj;
+	var thPlan, therbligName, index, therbligObj, agent;
 	var newTherbligList = [];
-	//determine how many tasks are in the planList
-	for (var task in planList) {
-		thPlan = planList[task].therblig;
+
+	//loop through each therblig in the optimized plan list
+	for (var th in planList) {
+		thPlan = planList[th].therblig;
+		agent = planList[th].agent;
+
 		index = thPlan.substr(thPlan.length - 1);
 		therbligName = getTherbligNameFromPlanName(thPlan);
 		therbligObj = getTherbligObjFromName(therbligName, actualList, index);
-		if(therbligObj !== undefined) newTherbligList.push(therbligObj);
+		
+		if(therbligObj !== undefined) {
+			if(agent === 'r') {
+				therbligObj.assign = false;
+			} 
+			else if(agent === 'h') {
+				therbligObj.assign = true;
+			}
+
+			newTherbligList.push(therbligObj);
+		}
 	}
 
 	return newTherbligList;
@@ -140,10 +159,16 @@ function optimizerParser() {
 
 	parser.optimizedPlanToTasks = function(optPlan, tasksToOpt) {
 		// Determine how many 'properties' are in the plan
+		//console.log('optplan: ');
+		//console.log(optPlan);
+		//console.log('tasksToOpt');
+		//console.log(tasksToOpt);
+
 		var obj = JSON.parse(optPlan);
 		var plan = obj.plan;
-		
+
 		var therbligList = sortTherbligs(plan);
+		//console.log(therbligList);
 		var optimizedList = convertFromPlanToTask(therbligList, tasksToOpt);
 
 		return optimizedList;

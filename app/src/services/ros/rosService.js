@@ -1,8 +1,8 @@
 "use strict"
 
 var ros = {};
-//const URL ='http://10.130.229.199:8888'
-const URL='http://127.0.0.1:8888'
+const URL ='http://10.130.229.199:8888'
+//const URL='http://127.0.0.1:8888'
 
 /* 
  * Connects to a websocket
@@ -175,13 +175,17 @@ function rosWebService($http) {
 	};
 
 	ros.optimizePlan = function(data) {
-		$http.post(URL + '/OptimizePlan',data)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
+		return new Promise(function(resolve, reject){
+			var retData;
+			$http.post(URL + '/OptimizePlan',data)
+    	.success(function (data, status, headers, config) {
+        retData = JSON.stringify(data);
+        resolve(retData);
+    	})
+    	.error(function (data, status, header, config) {
         console.log("Error, please check how you're making the get request.");
-    });
+    	});
+		});
 	}
 
 	return ros;

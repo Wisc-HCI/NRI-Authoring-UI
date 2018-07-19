@@ -8,7 +8,7 @@ var position = {
 
 var physicalTherbligs = [
     {
-      name: 'Transport Empty',
+      name: 'transport empty',
       type: 'physical',
       parameters: [
         position,
@@ -24,11 +24,11 @@ var physicalTherbligs = [
           val: '',
         },
       ],
-      allowed: ['Rest', 'Grasp'],
+      allowed: ['rest', 'grasp'],
       assign: false,
     },
     {
-      name: 'Grasp',
+      name: 'grasp',
       type: 'physical',
       parameters: [
         { name: 'Effort',
@@ -40,11 +40,11 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
-     allowed: ['Transport Loaded', 'Hold', 'Release Load', 'Position'],
+     allowed: ['transport loaded', 'hold', 'release load', 'position'],
      assign: false,
     },
     {
-      name: 'Transport Loaded',
+      name: 'transport loaded',
       type: 'physical',
       parameters: [
         position,
@@ -61,11 +61,11 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
-     allowed: ['Release Load', 'Position', 'Hold'],
+     allowed: ['release Load', 'position', 'hold'],
      assign: false,
     },
     {
-      name: 'Release Load',
+      name: 'release load',
       type: 'physical',
       parameters: [
         {
@@ -74,7 +74,7 @@ var physicalTherbligs = [
         },
       ],
      thing: {},
-     allowed: ['Transport Empty', 'Grasp', 'Rest'],
+     allowed: ['transport empty', 'grasp', 'rest'],
      assign: false,
     },
     {
@@ -90,11 +90,11 @@ var physicalTherbligs = [
         } ,
       ],
      thing: {},
-     allowed: ['Transport Loaded', 'Release Load'],
+     allowed: ['transport loaded', 'release load'],
      assign: false,
     },
     {
-      name: 'Position',
+      name: 'position',
       type: 'physical',
       parameters: [
         position,
@@ -106,7 +106,7 @@ var physicalTherbligs = [
           val: '',
         },
       ],
-      allowed: ['Transport Loaded', 'Hold', 'Release Load'],
+      allowed: ['transport loaded', 'hold', 'release load'],
       assign: false,
     },
     /*
@@ -126,7 +126,7 @@ var physicalTherbligs = [
     },
     */
     {
-      name: 'Rest',
+      name: 'rest',
       type: 'physical',
       parameters: [
         position,
@@ -138,7 +138,7 @@ var physicalTherbligs = [
           val: '',
         },
       ],
-      allowed: ['Transport Empty', 'Grasp'],
+      allowed: ['transport Empty', 'grasp'],
       assign: false,
     },
 ];

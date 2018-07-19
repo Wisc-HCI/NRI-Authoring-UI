@@ -175,13 +175,24 @@ function AppController(TherbligsDataService, TaskCardsDataService,
 
   self.optimize = (tasksToOptimize) => {
     var data,config;
-    //data = optimizerParser.tasksToPDDLJson(tasksToOptimize);
-    //rosWebService.optimizePlan(data)
-    
-    //console.log(self.tasks);
-    var optimizedPlan = '{"cost": 15.0,"plan": {"Grasp0": {"agent": "r","cost": "5","duration": "5","starttime": "5.01"},"Release_Load0": {"agent": "r","cost": "5","duration": "5","starttime": "10.02"},"Transport_Empty0": {"agent": "r","cost": "5","duration": "5","starttime": "0.00"}},"time": 15.02}';
-    var optimizedTask = optimizerParser.optimizedPlanToTasks(optimizedPlan, tasksToOptimize);
-    self.tasks[0].therbligList = optimizedTask;
+    data = optimizerParser.tasksToPDDLJson(tasksToOptimize);
+    //var optimizedPlan = rosWebService.optimizePlan(data)
+
+    rosWebService.optimizePlan(data)
+    .then( function(result) {
+      //console.log(result);
+
+      //console.log(optimizedPlan);
+      //console.log(self.tasks);
+      //var optimizedPlan = '{"cost": 15.0,"plan": {"Grasp0": {"agent": "r","cost": "5","duration": "5","starttime": "5.01"},"release_load0": {"agent": "r","cost": "5","duration": "5","starttime": "10.02"},"transport_empty0": {"agent": "r","cost": "5","duration": "5","starttime": "0.00"}},"time": 15.02}';
+      //console.log(result);
+      //var optimizePlan = result;
+
+      var optimizedTask = optimizerParser.optimizedPlanToTasks(result, tasksToOptimize);
+      //console.log(optimizedTask);
+      
+      self.tasks[0].therbligList = optimizedTask;
+    });
   };
 
   /*
