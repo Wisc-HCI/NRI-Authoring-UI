@@ -174,23 +174,14 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   };
 
   self.optimize = (tasksToOptimize) => {
-    //tasksToOptimize.forEach(function(task) {});
     var data,config;
-    //var jsonTasks = angular.toJson( tasksToOptimize );
-    //var data = jsonTasks;
-
-    data = optimizerParser.tasksToPDDL(tasksToOptimize);
-    console.log(data);
+    //data = optimizerParser.tasksToPDDLJson(tasksToOptimize);
+    //rosWebService.optimizePlan(data)
     
-    /*    
-    $http.post('http://10.130.229.199:8888/OptimizePlan',data)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error, please check how you're making the get request.");
-    });
-    */
+    //console.log(self.tasks);
+    var optimizedPlan = '{"cost": 15.0,"plan": {"Grasp0": {"agent": "r","cost": "5","duration": "5","starttime": "5.01"},"Release_Load0": {"agent": "r","cost": "5","duration": "5","starttime": "10.02"},"Transport_Empty0": {"agent": "r","cost": "5","duration": "5","starttime": "0.00"}},"time": 15.02}';
+    var optimizedTask = optimizerParser.optimizedPlanToTasks(optimizedPlan, tasksToOptimize);
+    self.tasks[0].therbligList = optimizedTask;
   };
 
   /*

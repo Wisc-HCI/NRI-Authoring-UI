@@ -2,6 +2,7 @@
 
 var parser = {};
 
+////////////THERBLIGLIST CONVERT TO PDDL JSON/////////
 function PDDLObj() {
   this.name = 'example';
   this.timeweight = 1;
@@ -13,15 +14,15 @@ function getTaskListObj(listOfTherbligNames) {
 	for(var i = 0; i < listOfTherbligNames.length; i++){
 		for(var j = 0; j < listOfTherbligNames[i].length; j++) {
 			var taskName, preconditions, constraints;
-			taskName = listOfTherbligNames[i][j]+i;
+			taskName = listOfTherbligNames[i][j] + i;
 
 			if(j == 0) preconditions = "none";
-			else preconditions = listOfTherbligNames[i][j-1]+i;
+			else preconditions = listOfTherbligNames[i][j-1] + wi;
 
 			if(listOfTherbligNames[i].length == 1) constraints = "none";
-			else if(j == 0) constraints = "start: path"+i;
-			else if(j == listOfTherbligNames[i].length -1) constraints = "end: path"+i;
-			else constraints = "path"+i;
+			else if(j == 0) constraints = "start: path" + i;
+			else if(j == listOfTherbligNames[i].length -1) constraints = "end: path" + i;
+			else constraints = "path" + i;
 
 			taskListObj[taskName] = new genericTaskObj(preconditions, constraints);
 		}
@@ -37,9 +38,84 @@ function genericTaskObj(pre, constraint) {
 	this.constraint = constraint;
 }
 
+// therblig names can contain spaces in them. The PDDL optimizer 
+// we are using requires that the names do not contain any spaces.
+// @params
+// 	therbligName - name of the therblig
+function convertTherbligNameToPDDLformat(therbligName) {
+	var formatName = therbligName;
+	var delim = '_';
 
+	return formatName;
+}
+
+/////////OUTPUT BACK INTO THERBLIGLIST/////
+function sortTherbligs(plan) {
+	var obj = [];
+	for (var key in plan){
+		if (plan.hasOwnProperty(key)) {
+				plan[key].therblig = key;
+				obj.push(plan[key]);
+		}
+	};
+
+	obj.sort(function(a,b) {
+		return Number(a.starttime) - Number(b.starttime)
+	});
+
+	// obj should be sorted now
+	// each entry in object should be in the format of:
+	// agent: r or h
+	// cost: cost
+	// duration: duration
+	// starttime: time
+	// therblig: name
+	return obj;
+};
+
+function getTherbligNameFromPlanName(name) {
+	var therbligName;
+	therbligName = name.replace('_', ' ').substring(0, name.length - 1);
+	return therbligName;
+};
+
+function getTherbligObjFromName(name, taskList, taskNo) {
+	var therbligObj, therbligList, task, therblig;
+	
+	task = taskList[taskNo];
+	therbligList = task.therbligList;
+
+	for (var i in therbligList) {
+		therblig = therbligList[i];
+		if(therblig.name === name) {
+			therbligObj = therblig;
+			break;
+		}
+	}
+	
+	return therbligObj;
+};
+
+function convertFromPlanToTask(planList, actualList) {
+	//handle 1 task case
+	var thPlan, therbligName, index, therbligObj;
+	var newTherbligList = [];
+	//determine how many tasks are in the planList
+	for (var task in planList) {
+		thPlan = planList[task].therblig;
+		index = thPlan.substr(thPlan.length - 1);
+		therbligName = getTherbligNameFromPlanName(thPlan);
+		therbligObj = getTherbligObjFromName(therbligName, actualList, index);
+		if(therbligObj !== undefined) newTherbligList.push(therbligObj);
+	}
+
+	return newTherbligList;
+}
+
+
+////////PARSER///////////////////////////
 function optimizerParser() {
-	parser.tasksToPDDL = function(taskList) {
+	parser.tasksToPDDLJson = function(taskList) {
 		var outputObj, taskListObj;
 
 		outputObj = new PDDLObj();
@@ -52,27 +128,27 @@ function optimizerParser() {
 
 			for(var i = 0; i < taskList[j].therbligList.length; i++)
 			{
-				therbligNames[j].push(taskList[j].therbligList[i].name);
+				var PDDLformatName = convertTherbligNameToPDDLformat(taskList[j].therbligList[i].name)
+				therbligNames[j].push(PDDLformatName);
 			}
 		};
 
 		taskListObj = getTaskListObj(therbligNames);
 		outputObj.tasks = taskListObj;
-		//console.log(angular.toJson(outputObj));
-
-
-		// keep 'name' property
-		// remove 'type' property
-		// if repeat > 0, repeat the task
-		// therbligList property contains an array of therblig objects 
-
-		/*
-		
-
-
-		*/
 		return angular.toJson(outputObj);
 	};
+
+	parser.optimizedPlanToTasks = function(optPlan, tasksToOpt) {
+		// Determine how many 'properties' are in the plan
+		var obj = JSON.parse(optPlan);
+		var plan = obj.plan;
+		
+		var therbligList = sortTherbligs(plan);
+		var optimizedList = convertFromPlanToTask(therbligList, tasksToOpt);
+
+		return optimizedList;
+	};
+
 
 	return parser;
 };
