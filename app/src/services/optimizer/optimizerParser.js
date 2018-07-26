@@ -98,8 +98,8 @@ function getTherbligObjFromName(name, taskList, taskNo) {
 };
 
 function convertFromPlanToTask(planList, actualList) {
-	console.log('planList: ');
-	console.log(planList);
+	//console.log('planList: ');
+	//console.log(planList);
 	//console.log('actualList: ');
 	//console.log(actualList);
 

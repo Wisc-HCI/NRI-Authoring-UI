@@ -26,19 +26,16 @@
   </md-toolbar>
 
   <!-- Container #2: Main Container -->
-  <div flex layout="row" style="height:85%;">
+  <div flex layout="row"">
     <!-- Container #3: Sidebar: Therblig List, Position, Destinations, Macros-->
     <div ng-include="'/src/main/sidebar.html'"></div>
     <!-- Container #4: Task  Cards -->
     <md-content flex id="content" style="background-color: #f8f6f6;">
-      <!-- Floating FAB-->
-      <md-button class="md-fab md-fab-top-right md-primary tooltip" aria-label="ExecutePlan">
-        <md-icon>send</md-icon>
-      </md-button>
-          <task-cards tasks="app.tasks" selected="app.selected"
+      <!-- Task Cards -->
+      <task-cards tasks="app.tasks" selected="app.selected"
             positions="app.positions" things="app.things" macros="app.macros"
             on-selected="app.selectTherblig(therblig)">
-          </task-cards>      
+      </task-cards>  
     </md-content>
     <!-- Floating FAB-->
     <md-button class="md-fab md-fab-bottom-right md-accent tooltip" 

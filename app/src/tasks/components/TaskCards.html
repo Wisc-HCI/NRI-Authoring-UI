@@ -1,7 +1,7 @@
 <div class='md-padding task-cards-container flipped' layout="row" flex >
   <div class='flipped'>
     <!-- Drag and Drop list of Tasks -->
-      <div layout="row" dnd-list="$ctrl.tasks"
+      <div class="task-card-container" dnd-list="$ctrl.tasks"
       dnd-horizontal-list="true" dnd-allowed-types="['task']">
       <div class="parent" layout="column" ng-repeat="task in $ctrl.tasks" flex
           dnd-draggable="task"
@@ -13,7 +13,7 @@
           <div layout="row" md-colors="::{backgroundColor: 'default-primary'}">
             <div flex>
               <md-card-title class="task-card-title" >
-                {{ task.name }}
+                {{ ($index + 1) + ". " + task.name }}
               </md-card-title>
             </div>
             <div>
@@ -45,7 +45,9 @@
                     </md-menu-item>
                   </md-menu-content>
               </md-menu>
+              <!--
               <md-switch ng-model="data.assign" aria-label="Switch 1"></md-switch>
+              !-->
             </div>
           </div>
 
@@ -54,14 +56,16 @@
             <md-list dnd-list="task.therbligList" 
                      dnd-drop="$ctrl.dropCallBack(index, item, external, type,
                      task.therbligList)"
-              dnd-allowed-types="['physical', 'cognitive', 'cognitivePhysical', 'macro']">
+              dnd-allowed-types="['physical', 'cognitive', 'cognitivePhysical', 'macro']"
+              class="md-list-container">
               <md-list-item 
                 ng-repeat="therblig in task.therbligList"
                 dnd-draggable="therblig"
                 dnd-type="therblig.type"
                 dnd-moved="task.therbligList.splice($index, 1)"
-                dnd-effect-allowed="move">
-                <span class="md-button md-raised">
+                dnd-effect-allowed="move"
+                class="list-container">
+                <span class="md-button md-raised task-item">
                   <div ng-class="{'selected': therblig === $ctrl.selected}">
                       {{ therblig.name }}              
                     <md-button style="right: 0px; position:absolute;" class="md-icon-button button-icon" aria-label="Edit Therblig"
@@ -113,15 +117,21 @@
                       </md-menu>
                     </div>
                   </div>
+                  <!-- Removed For Testing Purposes
                   <div layout="row" ng-show="data.assign">
                     <md-switch ng-model="therblig.assign" aria-label="Switch 1">
                       <span ng-if="therblig.assign">Human</span>
                       <span ng-if="!therblig.assign">Robot</span>
                     </md-switch>
                   </div>
+                -->
                 </span>
               </md-list-item>
+              <md-list-item class="task-instruction" ng-if="task.therbligList.length === 0">DRAG AND DROP</md-list-item>
             </md-list>
+            <span class="md-button md-primary add-task-item">
+              <md-icon>add</md-icon>Add Therblig
+            </span>
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
             <md-button ng-disabled="true">

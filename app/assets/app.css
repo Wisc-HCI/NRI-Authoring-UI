@@ -2,7 +2,6 @@
   display: none;
 }
 
-
 .emptyClass {
   background-color: #d6d6d6 !important;
   color: black !important;
@@ -53,6 +52,7 @@ md-toolbar h1 {
 .sidebar-item:hover {
   transform: scale(1.1);
 }
+
 
 md-list .md-button {
   color: inherit;
@@ -170,6 +170,12 @@ span.name {
   overflow-y: auto;
 }
 
+.task-card-container {
+  display: flex;
+  flex-direction: row;
+}
+
+
 .flipped {
   transform:rotateX(180deg);
   -ms-transform:rotateX(180deg); /* IE 9 */
@@ -180,12 +186,47 @@ span.name {
   width: 375px;
 }
 
+
 .task-card-title {
   margin-left: auto;
   margin-right: auto;
 }
 
 .task-card-content {
+}
+
+.task-item {
+  transition: all .2s ease-in-out;
+}
+
+.task-item:hover {
+  opacity:0.9;
+}
+
+.add-task-item {
+  left: 15px;
+  width: 295px;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
+.md-list-container {
+  border-style: dashed;
+  border-width: 2px;
+  border-color: #e6e6e6;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.task-instruction {
+  transition: all .2s ease-in-out;
+}
+
+.task-instruction:hover {
+}
+
+.list-container {
+
 }
 
 /* Input styles */

@@ -98,7 +98,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     // Once done, close modal and add the task to the task list
     $scope.done = function() {
       $mdDialog.cancel();
-      therbligTasks.unshift(currentTask);
+      therbligTasks.push(currentTask);
     };
 
     // Create new task
@@ -189,7 +189,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
       //var optimizePlan = result;
 
       var optimizedTask = optimizerParser.optimizedPlanToTasks(result, tasksToOptimize);
-      //console.log(optimizedTask);
+      console.log(optimizedTask);
       
       self.tasks[0].therbligList = optimizedTask;
     });
