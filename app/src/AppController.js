@@ -1,5 +1,5 @@
 /**
- * Main App Controller for the Angular Material Starter App
+ * Main App Controller for the Authoring Environment
  * @param TherbligsDataService
  * @param TaskCardsDataService
  * @param $mdSidenav
@@ -122,38 +122,25 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     $mdMenu.open(ev);
   }
 
+  /*
+  * Wrapper function to check the ros server status.
+  */
   self.checkROS = () => {
     console.log("Checking ROS...... (not really)");
-
-    /*      
-    var data,config;
-    data = {"Action":"CheckROSLive"};
-    console.log("checking ros");
-    $http.post('/checkROS', data, config)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error");
-    });
-    */
   };
 
+  /*
+  * Wrapper function to start ROS
+  */
   self.launchROS = () => {      
     console.log("Launching ROS........ (not really)");
-
-    /*
-    var data,config;
-    $http.post('/launchROS', data, config)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error");
-    });*/
   };
 
+  /*
+  * Wrapper function to exit from ROS
+  */
   self.exit = () => {      
+    /*
     var data,config;
     $http.post('/exit', data, config)
     .success(function (data, status, headers, config) {
@@ -161,36 +148,35 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     })
     .error(function (data, status, header, config) {
         console.log("Error");
-    });
+    });*/
+    console.log("Exiting ROS....");
 
   };
 
+  /*
+  * Wrapper function to turn on force control
+  */
   self.turnOnForce = () => {
     rosWebService.turnOnForceCtrl();
   };
   
+  /*
+  * Wrapper function to turn off force control
+  */
   self.turnOffForce = () => {
     rosWebService.turnOffForceCtrl();
   };
 
+  /*
+  * Optimizes the current Tasks
+  * @param array of tasks currently on the plan
+  */
   self.optimize = (tasksToOptimize) => {
     var data,config;
     data = optimizerParser.tasksToPDDLJson(tasksToOptimize);
-    //var optimizedPlan = rosWebService.optimizePlan(data)
-
     rosWebService.optimizePlan(data)
     .then( function(result) {
-      //console.log(result);
-
-      //console.log(optimizedPlan);
-      //console.log(self.tasks);
-      //var optimizedPlan = '{"cost": 15.0,"plan": {"Grasp0": {"agent": "r","cost": "5","duration": "5","starttime": "5.01"},"release_load0": {"agent": "r","cost": "5","duration": "5","starttime": "10.02"},"transport_empty0": {"agent": "r","cost": "5","duration": "5","starttime": "0.00"}},"time": 15.02}';
-      //console.log(result);
-      //var optimizePlan = result;
-
-      var optimizedTask = optimizerParser.optimizedPlanToTasks(result, tasksToOptimize);
-      console.log(optimizedTask);
-      
+      var optimizedTask = optimizerParser.optimizedPlanToTasks(result, tasksToOptimize);      
       self.tasks[0].therbligList = optimizedTask;
     });
   };
@@ -209,16 +195,19 @@ function AppController(TherbligsDataService, TaskCardsDataService,
    * Upload tasks.
    *
    */
-  $scope.$watch('file', function(){
-    if($scope.file) {
+  $scope.onTaskFileSelect = function(file) {
+    if(typeof file !== 'undefined') 
+    {
       var r = new FileReader();
       r.onloadend = function(e){
         var data = e.target.result;
         self.tasks = JSON.parse(data);
+        
+        $scope.$apply();
       };
-      r.readAsText($scope.file);
+      r.readAsText(file);
     }
-  });
+  };
 
   /*
    * Save Things
@@ -234,16 +223,18 @@ function AppController(TherbligsDataService, TaskCardsDataService,
    * Upload things.
    *
    */
-  $scope.$watch('thingsFile', function(){
-    if($scope.thingsFile) {
+  $scope.onThingsFileSelect = function(file) {
+    if(typeof file !== 'undefined'){
       var r = new FileReader();
       r.onloadend = function(e){
         var data = e.target.result;
         self.things = JSON.parse(data);
+
+        $scope.$apply();
       };
-      r.readAsText($scope.thingsFile);
+      r.readAsText(file);
     }
-  });
+  };
 
   /*
    * Save Positions
@@ -259,16 +250,19 @@ function AppController(TherbligsDataService, TaskCardsDataService,
    * Upload things.
    *
    */
-  $scope.$watch('positionsFile', function(){
-    if($scope.positionsFile) {
+  $scope.onPositionsFileSelect = function(file) {
+    if(typeof file !== 'undefined')
+    {
       var r = new FileReader();
       r.onloadend = function(e){
         var data = e.target.result;
         self.positions = JSON.parse(data);
+
+        $scope.$apply();
       };
-      r.readAsText($scope.positionsFile);
-    }
-  });
+      r.readAsText(file);
+    }      
+  };
 
   /*
    * Save Macros
@@ -285,16 +279,19 @@ function AppController(TherbligsDataService, TaskCardsDataService,
    * Upload Macros
    *
    */
-  $scope.$watch('macrosFile', function(){
-    if($scope.macrosFile) {
+  $scope.onMacroFileSelect = function(file) {
+    if(typeof file !== 'undefined') 
+    {
       var r = new FileReader();
       r.onloadend = function(e){
         var data = e.target.result;
         self.macros = JSON.parse(data);
+
+        $scope.$apply();
       };
-      r.readAsText($scope.macrosFile);
-    }
-  });
+      r.readAsText(file);
+    }      
+  };
 
   /**
    * Select the current therblig
@@ -311,6 +308,9 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     $mdSidenav('left').toggle();
   };
 
+  /*
+  * Adds position. Allows user to add a new destination.
+  */
   self.addDestination = (ev) => {
       $mdDialog.show({
       controller: AddDestinationController,
@@ -326,6 +326,9 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     });
   }
 
+  /*
+  * Controller to add Destination
+  */
   function AddDestinationController($scope, $mdDialog, $mdMenu) {
     
     var position = {
@@ -346,7 +349,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   }
 
   /*
-   *
+   * Add Thing function. Allows user to add a new object.
    */
   self.addThing = (ev) => {
     $mdDialog.show({
@@ -363,6 +366,9 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     });
   };
 
+  /*
+  * Add Thing controller
+  */
   function AddThingController($scope, $mdDialog,$mdMenu) {
     
     /*Fix this later*/
@@ -398,6 +404,9 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     };
   }
 
+  /*
+  * Toggles the side bar's button
+  */
   $scope.btnToggle = function($event){
     var cName = $event.target.className;
     if (cName === "md-primary md-raised md-button md-ink-ripple")

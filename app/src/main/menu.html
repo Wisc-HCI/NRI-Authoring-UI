@@ -4,7 +4,7 @@
       </md-button>
       <md-menu-content width="4">
         <md-menu-item>
-          <md-button class="md-button" ng-click="app.optimize(app.tasks)" aria-label="launch">
+          <md-button class="md-button" ng-disabled=1 ng-click="app.optimize(app.tasks)" aria-label="launch">
             <md-icon>update</md-icon>
             Optimize Plan
           </md-button>
@@ -52,7 +52,13 @@
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ngf-select ng-model="file" class="md-button" aria-label="upload">
+          <md-button 
+            ngf-select="onTaskFileSelect(file)" 
+            ng-model="file" 
+            ngf-pattern="'.json'"
+            accept=".json" 
+            class="md-button" 
+            aria-label="upload">
             <md-icon md-svg-icon="../assets/svg/ic_file_upload_black_24px.svg"></md-icon>
             Load Plan
           </md-button>

@@ -41,7 +41,8 @@
                 <md-icon md-svg-icon="../assets/svg/baseline-add-24px.svg"></md-icon>
                 Add
               </md-button>
-              <md-button ngf-select ng-model="thingsFile" class="md-button" aria-label="Favorite">
+              <md-button ngf-select="onThingsFileSelect(thingsFile)"  ng-model="thingsFile"
+                ngf-pattern="'.json'" accept=".json" class="md-button" aria-label="Favorite">
                 <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg" style="color: greenyellow;"></md-icon>
                 Upload Things
               </md-button>
@@ -64,7 +65,8 @@
                 <md-icon md-svg-icon="../assets/svg/baseline-add-24px.svg"></md-icon>
                 Add
               </md-button>
-              <md-button ngf-select ng-model="positionsFile"
+              <md-button ngf-select="onPositionsFileSelect(positionsFile)"  ng-model="positionsFile"
+                ngf-pattern="'.json'" accept=".json"
                 class="md-button positions-toolbar-button"
                 aria-label="Upload Destination">
                 <md-icon
@@ -91,7 +93,8 @@
           <md-toolbar class="md-accent">
             <div class="md-toolbar-tools">
 
-              <md-button ngf-select ng-model="macrosFile"
+              <md-button ngf-select="onMacroFileSelect(macrosFile)"  ng-model="macrosFile"
+                ngf-pattern="'.json'" accept=".json" 
                 class="md-button" aria-label="Upload Macros">
                 <md-icon
                   md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
