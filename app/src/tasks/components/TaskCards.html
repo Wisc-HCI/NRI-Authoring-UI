@@ -7,7 +7,9 @@
           dnd-draggable="task"
           dnd-type="task.type"
           dnd-moved="$ctrl.tasks.splice($index, 1)"
-          dnd-effect-allowed="move">
+          dnd-effect-allowed="move"
+          ng-controller="TaskInstanceController"
+          ng-model="task">
         <md-card class="task-cards md-whiteframe-10dp">
           <!-- Title -->
           <div layout="row" md-colors="::{backgroundColor: 'default-primary'}">
@@ -23,17 +25,17 @@
                   </md-button>
                   <md-menu-content width="3">
                     <md-menu-item>
-                      <md-button class="md-button" aria-label="Edit Task" ng-click="$ctrl.editTask($event, task, $ctrl.tasks, $ctrl.macros)">
-                        <md-icon md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg"></md-icon>
-                        Edit Task
+                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
+                        ng-click="$ctrl.checkConstraints($event, task)">
+                        <md-icon>check_circle_outline</md-icon>
+                        Check Constraints
                       </md-button>
                     </md-menu-item>
                     <md-menu-divider></md-menu-divider>
                     <md-menu-item>
-                      <md-button class="md-button" aria-label="Assign Task" ng-disabled="task.therbligList.length == 0"
-                        ng-click="$ctrl.executePlan($event, task)">
-                        <md-icon md-svg-icon="../assets/svg/ic_send_black_24px.svg"></md-icon>
-                        Execute Task
+                       <md-button class="md-button" aria-label="Edit Task" ng-click="$ctrl.editTask($event, task, $ctrl.tasks, $ctrl.macros)">
+                        <md-icon md-svg-icon="../assets/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                        Edit Task
                       </md-button>
                     </md-menu-item>
                     <md-menu-divider></md-menu-divider>
@@ -53,6 +55,12 @@
 
           <! -- Therblig List in Task -->
           <md-card-content class="task-card-content">
+            <div ng-if="task.valid === true" class="alertSuccess">
+              <strong>Success!</strong> All constraints are satisfied.
+            </div>
+            <div ng-if="task.valid === false" class="alertFail">
+              <strong> Fail! </strong> Contraints not satisfied.
+            </div>
             <md-list dnd-list="task.therbligList" 
                      dnd-drop="$ctrl.dropCallBack(index, item, external, type,
                      task.therbligList)"
@@ -64,7 +72,7 @@
                 dnd-type="therblig.type"
                 dnd-moved="task.therbligList.splice($index, 1)"
                 dnd-effect-allowed="move"
-                class="list-container">
+                ng-class="{listContainer: therblig.wrong}">
                 <span class="md-button md-raised task-item">
                   <div ng-class="{'selected': therblig === $ctrl.selected}">
                       {{ therblig.name }}              

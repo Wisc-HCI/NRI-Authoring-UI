@@ -30,13 +30,18 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
     else valid = therblig.constraints.indexOf(pTherblig) > -1;
 
     return valid;
+  };
+
+
+  function isNextValid(current, next) {
+    return current.allowed.indexOf(next.name) > -1;
   }
 
   var originatorEv;
   self.openTaskMenu = (ev,$mdMenu) => {
     originatorEv = ev;
     $mdMenu.open(ev);
-  }
+  };
 
   /*
   *
@@ -46,13 +51,44 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
     action["content"] = [];
     action["content"].push(task);
     rosWebService.executePlan(action);
-  }
+  };
 
+
+  /*
+  * Checks to make sure all the therbligs on the task
+  * satisfy logical constraints
+  *
+  * @param1 event service variable
+  * @param2 list of the current task
+  */
+  self.checkConstraints = (ev, task) => {
+    var valid = true;
+    var tList = task.therbligList;
+    for (var i = 0; i < tList.length - 1; i++) {
+        if(!isNextValid(tList[i], tList[i + 1])){
+          tList[i + 1].wrong = true;
+          valid = false;
+        }
+        else
+        {
+          tList[i + 1].wrong = false;
+        }
+    }
+
+    task.valid = valid;
+  };
+
+  /*
+  * Deletes the task.
+  *
+  * @param1 current tasks
+  * @param2 list of all tasks
+  */
   self.deleteTask = (task,tasks) => {
       var taskList = tasks;
       var index = taskList.indexOf(task);
       taskList.splice(index, 1);
-    };
+  };
 
   /*
    * Edit the therblig.
@@ -73,6 +109,11 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
           fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
         });
   };
+
+  function TaskInstanceController($scope) {
+    console.log("Task Instance");
+  }
+
 
   // Variables for Edit Task method
   var taskToEdit = {};
@@ -159,60 +200,11 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
         });
   };
 
-  function AssignTaskController($scope, $mdDialog) {
-    $scope.task = taskToEdit;
-    
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-  }
-
-  function AssignTaskControllerTwo($scope, $mdDialog) {
-    $scope.task = taskToEdit;
-    
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-  }
-
-  function isValid(therblig, index, therbligsList) {
-    var pTherblig, nTherblig, valid;
-
-    valid = true;
-    if(therbligsList.length == 0) return valid;
-    else {
-
-      // inserting into the middle or end
-      if(index != 0 ) {
-
-        // check previous therblig
-        pTherblig = therbligsList[index-1];
-        valid = pTherblig.allowed.indexOf(therblig.name) > -1;
-
-        // check next therblig
-        if(index < therbligsList.length - 1){
-          nTherblig = therbligsList[index];
-          valid = therblig.allowed.indexOf(nTherblig.name) > -1;
-        } 
-
-      } 
-      // inserting into the top of the list
-      else {
-        nTherblig = therbligsList[index];
-        valid = therblig.allowed.indexOf(nTherblig.name) > -1;
-      }
-    }
-    
-    return valid;
-  }
-
   /*
    * Drop callback for Task TherbligsList
    */
   self.dropCallBack = (index, item, external, type, therbligsList) => {    
     if(type == "physical" || type == "cognitive" || type == "cognitivePhysical") {
-      
-      if(!isValid(item,index,therbligsList)) return false
       
       var prop = 'thing';
       if(item.hasOwnProperty(prop)){
@@ -229,8 +221,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
         }        
       }
 
-      return item;    
-      //return false;
+      return item;
     } else {
       item.therbligsList.forEach(function(entry) {
         therbligsList.push(entry);
