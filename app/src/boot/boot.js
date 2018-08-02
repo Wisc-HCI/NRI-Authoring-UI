@@ -8,15 +8,12 @@ import App from 'src/app';
  * Manually bootstrap the application when AngularJS and
  * the application classes have been loaded.
  */
-angular
-  .element( document )
-  .ready( function() {
+
     angular
-      .module( 'starter-app-bootstrap', [ App.name ] )
+      .module( 'authoring-environment', [ App.name ] )
       .run(()=>{
         console.log(`Running the NSF NRI Authoring Environment`);
       });
 
     let body = document.getElementsByTagName("body")[0];
-    angular.bootstrap( body, [ 'starter-app-bootstrap' ]);
-  });
+    angular.bootstrap( body, [ 'authoring-environment' ]);

@@ -1,119 +1,117 @@
-    <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
-                md-component-id="left" ng-click="app.toggleList()" style="height: 100%;">
-      <!-- Title -->
-      <md-tabs md-stretch-tabs="auto" md-dynamic-height="true">
-        <md-tab label="therbligs">
-          <br>
-          <div>
-            <md-button class="md-primary md-raised" ng-click="showDetails =! showDetails; btnToggle($event)">Physical</md-button>
-            <therbligs-list ng-show="!showDetails"
-              therbligs="app.physicalTherbligs"
-              allowed-types="['physical']"
-              selected="app.selected"
-              on-selected="app.selectTherblig(therblig)">
-            </therbligs-list>
-          </div>
-          <div>
-            <md-button class="md-primary" ng-click="showDetails2 =! showDetails2; btnToggle($event)">Cognitive</md-button>
-              <therbligs-list ng-show="showDetails2"
-                therbligs="app.cognitiveTherbligs"
-                allowed-types="['congitive']"
-                selected="app.selected"
-                on-selected="app.selectTherblig(therblig)">
-              </therbligs-list>
-          </div>
-          <div>
-            <md-button class="md-primary" ng-click="showDetails3 =! showDetails3; btnToggle($event)">Physical and Cognitive</md-button>
-            <therbligs-list ng-show="showDetails3"
-              therbligs="app.cogPhysTherbligs"
-              allowed-types="['cognitivePhysical']"
-              selected="app.selected"
-              on-selected="app.selectTherblig(therblig)">
-            </therbligs-list>
-          </div>
-        </md-tab>
+<md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')"
+            md-component-id="left" ng-click="app.toggleList()" style="height: 100%;">
+  <!-- Title -->
+  <md-tabs md-stretch-tabs="auto" md-dynamic-height="true">
+    <md-tab label="therbligs">
+      <br>
+      <div>
+        <md-button class="md-primary md-raised" ng-click="showDetails =! showDetails; btnToggle($event)">Physical</md-button>
+        <therbligs-list ng-show="!showDetails"
+          therbligs="app.physicalTherbligs"
+          allowed-types="['physical']"
+          selected="app.selected"
+          on-selected="app.selectTherblig(therblig)">
+        </therbligs-list>
+      </div>
+      <div>
+        <md-button class="md-primary" ng-click="showDetails2 =! showDetails2; btnToggle($event)">Cognitive</md-button>
+          <therbligs-list ng-show="showDetails2"
+            therbligs="app.cognitiveTherbligs"
+            allowed-types="['congitive']"
+            selected="app.selected"
+            on-selected="app.selectTherblig(therblig)">
+          </therbligs-list>
+      </div>
+      <div>
+        <md-button class="md-primary" ng-click="showDetails3 =! showDetails3; btnToggle($event)">Physical and Cognitive</md-button>
+        <therbligs-list ng-show="showDetails3"
+          therbligs="app.cogPhysTherbligs"
+          allowed-types="['cognitivePhysical']"
+          selected="app.selected"
+          on-selected="app.selectTherblig(therblig)">
+        </therbligs-list>
+      </div>
+    </md-tab>
 
-        <md-tab label="things">
-          <!-- Toolbar for Save and upload -->
-          <md-toolbar class="md-accent">
-            <div class="md-toolbar-tools">
-              <md-button ng-click="app.addThing($event)">
-                <md-icon md-svg-icon="../assets/svg/baseline-add-24px.svg"></md-icon>
-                Add
-              </md-button>
-              <md-button ngf-select="onThingsFileSelect(thingsFile)"  ng-model="thingsFile"
-                ngf-pattern="'.json'" accept=".json" class="md-button" aria-label="Favorite">
-                <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg" style="color: greenyellow;"></md-icon>
-                Upload Things
-              </md-button>
-              <md-button class="md-button" aria-label="More"
-              ng-click="app.saveThings(app.things)">
-                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg" style="color: greenyellow;"></md-icon>
-                Save Things
-              </md-button>
-            </div>
-          </md-toolbar>
-          <things-list things="app.things">
-          </things-list>
-        </md-tab>
+    <md-tab label="things">
+      <!-- Toolbar for Save and upload -->
+      <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="app.addThing($event)">
+            <md-icon md-svg-icon="../assets/svg/baseline-add-24px.svg"></md-icon>
+            Add
+          </md-button>
+          <md-button ngf-select="onThingsFileSelect(thingsFile)"  ng-model="thingsFile"
+            ngf-pattern="'.json'" accept=".json" class="md-button" aria-label="Favorite">
+            <md-icon md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg" style="color: greenyellow;"></md-icon>
+            Upload Things
+          </md-button>
+          <md-button class="md-button" aria-label="More"
+          ng-click="app.saveThings(app.things)">
+            <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg" style="color: greenyellow;"></md-icon>
+            Save Things
+          </md-button>
+        </div>
+      </md-toolbar>
+      <things-list things="app.things">
+      </things-list>
+    </md-tab>
 
-        <md-tab label="destinations">
-          <!-- Toolbar for Save and upload -->
-          <md-toolbar class="md-accent">
-            <div class="md-toolbar-tools">
-              <md-button ng-click="app.addDestination($event)">
-                <md-icon md-svg-icon="../assets/svg/baseline-add-24px.svg"></md-icon>
-                Add
-              </md-button>
-              <md-button ngf-select="onPositionsFileSelect(positionsFile)"  ng-model="positionsFile"
-                ngf-pattern="'.json'" accept=".json"
-                class="md-button positions-toolbar-button"
-                aria-label="Upload Destination">
-                <md-icon
-                  md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Upload Destinations
-              </md-button>
+    <md-tab label="destinations">
+      <!-- Toolbar for Save and upload -->
+      <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="app.addDestination($event)">
+            <md-icon md-svg-icon="../assets/svg/baseline-add-24px.svg"></md-icon>
+            Add
+          </md-button>
+          <md-button ngf-select="onPositionsFileSelect(positionsFile)"  ng-model="positionsFile"
+            ngf-pattern="'.json'" accept=".json"
+            class="md-button positions-toolbar-button"
+            aria-label="Upload Destination">
+            <md-icon
+              md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
+              style="color: greenyellow;"></md-icon>
+            Upload Destinations
+          </md-button>
 
-              <md-button class="md-button positions-toolbar-button"
-                         aria-label="Save Positions"
-              ng-click="app.savePositions(app.positions)">
-                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Save Destinations
-              </md-button>
-            </div>
-          </md-toolbar>
-          <positions-list positions="app.positions">
-          </positions-list>
-        </md-tab>
+          <md-button class="md-button positions-toolbar-button"
+                     aria-label="Save Positions"
+          ng-click="app.savePositions(app.positions)">
+            <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
+              style="color: greenyellow;"></md-icon>
+            Save Destinations
+          </md-button>
+        </div>
+      </md-toolbar>
+      <positions-list positions="app.positions">
+      </positions-list>
+    </md-tab>
 
-        <md-tab label="macros">
-          <!-- Toolbar for Save and upload -->
-          <md-toolbar class="md-accent">
-            <div class="md-toolbar-tools">
+    <md-tab label="macros">
+      <!-- Toolbar for Save and upload -->
+      <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
 
-              <md-button ngf-select="onMacroFileSelect(macrosFile)"  ng-model="macrosFile"
-                ngf-pattern="'.json'" accept=".json" 
-                class="md-button" aria-label="Upload Macros">
-                <md-icon
-                  md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Upload Macros
-              </md-button>
+          <md-button ngf-select="onMacroFileSelect(macrosFile)"  ng-model="macrosFile"
+            ngf-pattern="'.json'" accept=".json" 
+            class="md-button" aria-label="Upload Macros">
+            <md-icon
+              md-svg-icon="../assets/svg/ic_file_upload_white_24px.svg"
+              style="color: greenyellow;"></md-icon>
+            Upload Macros
+          </md-button>
 
-              <md-button class="md-button" aria-label="Save Macros"
-              ng-click="app.saveMacros(app.macros)">
-                <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
-                  style="color: greenyellow;"></md-icon>
-                Save Macros 
-              </md-button>
-            </div>
-          </md-toolbar>
-          <macros-list macros="app.macros">
-          </macros-list>
-        </md-tab>
-      </md-tabs>
-
-      <!-- Custom TherbligList component -->
-    </md-sidenav>
+          <md-button class="md-button" aria-label="Save Macros"
+          ng-click="app.saveMacros(app.macros)">
+            <md-icon md-svg-icon="../assets/svg/ic_save_white_24px.svg"
+              style="color: greenyellow;"></md-icon>
+            Save Macros 
+          </md-button>
+        </div>
+      </md-toolbar>
+      <macros-list macros="app.macros">
+      </macros-list>
+    </md-tab>
+  </md-tabs>
+</md-sidenav>

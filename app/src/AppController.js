@@ -15,6 +15,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
 
   // Things Variables
   self.things = [];
+  self.console = 0;
 
   // Load all library things
   ThingsDataService
@@ -306,6 +307,15 @@ function AppController(TherbligsDataService, TaskCardsDataService,
    */
   self.toggleList = () => {
     $mdSidenav('left').toggle();
+  };
+
+  self.toggleConsole = (ev) => {
+    if(self.console == 1){
+      self.console = 0;
+    }
+    else{
+      self.console = 1;
+    }
   };
 
   /*
