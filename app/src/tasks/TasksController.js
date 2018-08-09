@@ -79,7 +79,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogServ
       loggerLogService.log(null, "All constraints are statisfied.");
     }
     else {
-      loggerLogService.log("Some constraints are not statisfied.");
+      loggerLogService.log(null,"Some constraints are not statisfied.");
     }
 
     task.valid = valid;
