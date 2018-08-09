@@ -7,6 +7,8 @@
  */
 "use strict";
 
+var logElement;
+
 function AppController(TherbligsDataService, TaskCardsDataService,
   ThingsDataService, $mdSidenav, $mdDialog, $scope, $http, FileSaver, Blob, Upload,
   $timeout, PositionsDataService, MacrosDataService,rosWebService, loggerLogService, optimizerParser) {
@@ -16,6 +18,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   // Things Variables
   self.things = [];
   self.console = 0;
+  logElement = document.getElementById('logger');
 
   // Load all library things
   ThingsDataService
@@ -97,9 +100,11 @@ function AppController(TherbligsDataService, TaskCardsDataService,
    */
   function AddTaskController($scope, $mdDialog,$mdMenu,loggerLogService) {
     // Once done, close modal and add the task to the task list
+
     $scope.done = function() {
       $mdDialog.cancel();
       therbligTasks.push(currentTask);
+      loggerLogService.log(logElement, "Added " + currentTask.name);
     };
 
     // Create new task
@@ -107,8 +112,8 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     {
       name: '', type: 'task', repeat: 0,therbligList: [],
     };
-    $scope.task = currentTask;
 
+    $scope.task = currentTask;
     $scope.cancel = () => {
       $mdDialog.cancel();
     };
@@ -122,51 +127,6 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     originatorEv = ev;
     $mdMenu.open(ev);
   }
-
-  /*
-  * Wrapper function to check the ros server status.
-  */
-  self.checkROS = () => {
-    console.log("Checking ROS...... (not really)");
-  };
-
-  /*
-  * Wrapper function to start ROS
-  */
-  self.launchROS = () => {      
-    console.log("Launching ROS........ (not really)");
-  };
-
-  /*
-  * Wrapper function to exit from ROS
-  */
-  self.exit = () => {      
-    /*
-    var data,config;
-    $http.post('/exit', data, config)
-    .success(function (data, status, headers, config) {
-        alert(JSON.stringify(data));
-    })
-    .error(function (data, status, header, config) {
-        console.log("Error");
-    });*/
-    console.log("Exiting ROS....");
-
-  };
-
-  /*
-  * Wrapper function to turn on force control
-  */
-  self.turnOnForce = () => {
-    rosWebService.turnOnForceCtrl();
-  };
-  
-  /*
-  * Wrapper function to turn off force control
-  */
-  self.turnOffForce = () => {
-    rosWebService.turnOffForceCtrl();
-  };
 
   /*
   * Optimizes the current Tasks

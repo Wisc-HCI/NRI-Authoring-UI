@@ -18,26 +18,6 @@ import rosService from 'src/services/ros/rosService';
 import loggerService from 'src/services/logger/loggerService';
 import optimizerParser from 'src/services/optimizer/optimizerParser';
 
-
-// overwrite the console logger
-/*
-(function () {
-    if (!console) {
-        console = {};
-    }
-    var old = console.log;
-    var logger = document.getElementById('logger');
-    console.log = function (message) {
-      logger.innerHTML += '> ';
-        if (typeof message == 'object') {
-            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '<br />';
-        } else {
-            logger.innerHTML += message + '<br />';
-        }
-    }
-})();*/
-
-
 export default angular.module( 'nri-authoring-env', [
     'ngMaterial',
     'dndLists',

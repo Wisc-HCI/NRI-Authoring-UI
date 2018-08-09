@@ -3,13 +3,21 @@
 var logger = {};
 
 function loggerLogService() {
-	logger.log = function (message) {
-      logger.innerHTML += '> ';
-        if (typeof message == 'object') {
-            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '<br />';
-        } else {
-            logger.innerHTML += message + '<br />';
-        }
+ 	logger.log = function (element, message) {
+    if (element !== null){
+      logger.element = element;
+    }
+
+    if(element == null) {
+      element = logger.element;
+    }
+
+    element.innerHTML += 'output> ';
+      if (typeof message == 'object') {
+          element.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '<br />';
+      } else {
+          element.innerHTML += message + '<br />';
+      }
     }
 
    return logger;

@@ -1,6 +1,6 @@
 "use strict";
 
-function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
+function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogService) {
   var self = this;
 
   $scope.data = {
@@ -73,6 +73,13 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
         {
           tList[i + 1].wrong = false;
         }
+    }
+
+    if(valid) {
+      loggerLogService.log(null, "All constraints are statisfied.");
+    }
+    else {
+      loggerLogService.log("Some constraints are not statisfied.");
     }
 
     task.valid = valid;
@@ -232,4 +239,4 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService) {
 
 }
 
-export default [ '$mdDialog', '$scope', '$mdMenu', 'rosWebService', TasksController ];
+export default [ '$mdDialog', '$scope', '$mdMenu', 'rosWebService', 'loggerLogService', TasksController ];
