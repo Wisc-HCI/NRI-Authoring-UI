@@ -1,9 +1,19 @@
+/**
+ * loggerService
+ * Factory object that creates a "loggerService" object. 
+ * This object allows the user to specify an element 
+ * on the front end for which output can be appended to.
+ */
 "use strict"
 
 var logger = {};
 
 function loggerLogService() {
- 	logger.log = function (element, message) {
+
+  // Needs an element and a message
+  // Message - Message to be displayed
+  // Element - the HTML element that the message will be inserted into
+ 	logger.log = function (message, element) {
     if (element !== null){
       logger.element = element;
     }

@@ -1,8 +1,15 @@
+/**
+ * rosService
+ * Factory object that creates a "rosService" object. 
+ * RosService is an object that allows the front end to
+ * communicate with the back end. 
+ * Should be the main object making rest requests
+ */
 "use strict"
 
 var ros = {};
 const URL ='http://10.130.229.199:8888'
-//const URL='http://127.0.0.1:8888'
+
 
 /* 
  * Connects to a websocket
@@ -63,6 +70,7 @@ function initForceControl(turnOn) {
  */
 function rosWebService($http) {
 	
+	// Turns on force control for mico arm
 	ros.turnOnForceCtrl = function() {
 
 		var ros = new ROSLIB.Ros({
@@ -93,6 +101,7 @@ function rosWebService($http) {
 	  });
 	};
 
+	// turns off force control for mico arm
 	ros.turnOffForceCtrl = function() {
 		var ros = new ROSLIB.Ros({
     url : 'ws://10.140.169.116:9090'
@@ -122,7 +131,7 @@ function rosWebService($http) {
 	  });
 	};
 
-
+	// gets mico arm position
 	ros.getArmPosition = function() {
 	  return new Promise( function(resolve, reject) {
 	  	var ros = new ROSLIB.Ros({
@@ -158,7 +167,11 @@ function rosWebService($http) {
 	  });
 	}
 
-	// Execute Plan
+	/*
+	* Sends action over to therblig backend
+	* @params action - JSON object in the format of
+	*	 { action: "string" }
+	*/
 	ros.executePlan = function(action) {
     var data, config;
     data = action;
@@ -174,6 +187,10 @@ function rosWebService($http) {
     });*/
 	};
 
+	/*
+	* Sends current plan to optimizer
+	* @params data - a JSON object matching the required PDDL input
+	*/
 	ros.optimizePlan = function(data) {
 		return new Promise(function(resolve, reject){
 			var retData;

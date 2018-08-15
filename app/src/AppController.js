@@ -104,7 +104,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
     $scope.done = function() {
       $mdDialog.cancel();
       therbligTasks.push(currentTask);
-      loggerLogService.log(logElement, "Added " + currentTask.name);
+      loggerLogService.log("Added " + currentTask.name, logElement);
     };
 
     // Create new task
@@ -135,11 +135,18 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   self.optimize = (tasksToOptimize) => {
     var data,config;
     data = optimizerParser.tasksToPDDLJson(tasksToOptimize);
+    loggerLogService.log(data, null);
+    
+    /*
+    This function works. It is currently commented out pending back end
+    design decidions.
+
     rosWebService.optimizePlan(data)
     .then( function(result) {
       var optimizedTask = optimizerParser.optimizedPlanToTasks(result, tasksToOptimize);      
       self.tasks[0].therbligList = optimizedTask;
     });
+    */
   };
 
   /*
@@ -154,7 +161,6 @@ function AppController(TherbligsDataService, TaskCardsDataService,
 
   /*
    * Upload tasks.
-   *
    */
   $scope.onTaskFileSelect = function(file) {
     if(typeof file !== 'undefined') 
@@ -208,7 +214,7 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   };
 
   /*
-   * Upload things.
+   * Upload positions file
    *
    */
   $scope.onPositionsFileSelect = function(file) {

@@ -1,8 +1,14 @@
+/**
+ * Task Controller
+ * Main controller for tasks.
+ * @constructor
+ */
 "use strict";
 
 function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogService) {
   var self = this;
 
+  // Toggle for human/robot agent
   $scope.data = {
     assign: false
   };
@@ -32,7 +38,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogServ
     return valid;
   };
 
-
+  // Determines if the next therblig is valid
   function isNextValid(current, next) {
     return current.allowed.indexOf(next.name) > -1;
   }
@@ -44,7 +50,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogServ
   };
 
   /*
-  *
+  * Executes plan
   */
   self.executePlan = (ev,task) => {
     var action = {"Action":"ExecutePlan"};
@@ -76,10 +82,10 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogServ
     }
 
     if(valid) {
-      loggerLogService.log(null, "All constraints are statisfied.");
+      loggerLogService.log("All constraints are statisfied.");
     }
     else {
-      loggerLogService.log(null,"Some constraints are not statisfied.");
+      loggerLogService.log("Some constraints are not statisfied.");
     }
 
     task.valid = valid;
@@ -146,6 +152,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogServ
         });
   };
 
+  // Controller for the Therblig Edit Modal
   function EditModalController($scope, $mdDialog) {
     $scope.therblig = therbligToEdit;
     $scope.cancel = function() {
@@ -163,6 +170,7 @@ function TasksController($mdDialog, $scope, $mdMenu, rosWebService,loggerLogServ
     };
   }
 
+  // Controller for the Task Edit Modal
   function EditTaskController($scope, $mdDialog) {
     $scope.task = taskToEdit;
     

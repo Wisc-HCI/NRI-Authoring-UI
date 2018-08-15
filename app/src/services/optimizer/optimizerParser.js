@@ -2,13 +2,14 @@
 
 var parser = {};
 
-////////////THERBLIGLIST CONVERT TO PDDL JSON/////////
+// THERBLIGLIST CONVERT TO PDDL JSON
 function PDDLObj() {
   this.name = 'example';
   this.timeweight = 1;
   this.costweight = 1;
 };
 
+// Creates a genertic PDDL JSON object
 function getTaskListObj(listOfTherbligNames) {
 	var taskListObj = {};
 	for(var i = 0; i < listOfTherbligNames.length; i++){
@@ -31,6 +32,7 @@ function getTaskListObj(listOfTherbligNames) {
 	return taskListObj;
 };
 
+// This is a generic task object
 function genericTaskObj(pre, constraint) {
 	this.preconditions = pre;
 	this.duration = { "human": 5, "robot": 5 };
@@ -50,7 +52,9 @@ function convertTherbligNameToPDDLformat(therbligName) {
 	return formatName;
 }
 
-/////////OUTPUT BACK INTO THERBLIGLIST/////
+// Given an optimized plan, create a sorted list
+// based on the times in the plan
+// plan - the optimized plan
 function sortTherbligs(plan) {
 	var obj = [];
 	for (var key in plan){
@@ -74,12 +78,14 @@ function sortTherbligs(plan) {
 	return obj;
 };
 
+// Given a plan name, return the therblig name
 function getTherbligNameFromPlanName(name) {
 	var therbligName;
 	therbligName = name.replace('_', ' ').substring(0, name.length - 1);
 	return therbligName;
 };
 
+// Given a therblig name, returns the therblig object from the task list
 function getTherbligObjFromName(name, taskList, taskNo) {
 	var therbligObj, therbligList, task, therblig;
 	
@@ -97,11 +103,10 @@ function getTherbligObjFromName(name, taskList, taskNo) {
 	return therbligObj;
 };
 
+// Helper function
+// planList - the optimized plan list
+// actualList - the actual taskList based on the frontEnd
 function convertFromPlanToTask(planList, actualList) {
-	//console.log('planList: ');
-	//console.log(planList);
-	//console.log('actualList: ');
-	//console.log(actualList);
 
 	//handle 1 task case
 	var thPlan, therbligName, index, therbligObj, agent;
@@ -124,6 +129,7 @@ function convertFromPlanToTask(planList, actualList) {
 				therbligObj.assign = true;
 			}
 
+			// We have a new task list
 			newTherbligList.push(therbligObj);
 		}
 	}
@@ -132,8 +138,12 @@ function convertFromPlanToTask(planList, actualList) {
 }
 
 
-////////PARSER///////////////////////////
+// PARSER object
 function optimizerParser() {
+
+	// given the taskLists, strips away
+	// unnecessary data and reconstructs a JSON object
+	// that matches the PDDL input format
 	parser.tasksToPDDLJson = function(taskList) {
 		var outputObj, taskListObj;
 
@@ -157,18 +167,15 @@ function optimizerParser() {
 		return angular.toJson(outputObj);
 	};
 
+	// Given an optimized plan, restructure the task therbligs
+	// based on the optimized plan.
+	// Returns the optimized list
 	parser.optimizedPlanToTasks = function(optPlan, tasksToOpt) {
 		// Determine how many 'properties' are in the plan
-		//console.log('optplan: ');
-		//console.log(optPlan);
-		//console.log('tasksToOpt');
-		//console.log(tasksToOpt);
-
 		var obj = JSON.parse(optPlan);
 		var plan = obj.plan;
 
 		var therbligList = sortTherbligs(plan);
-		//console.log(therbligList);
 		var optimizedList = convertFromPlanToTask(therbligList, tasksToOpt);
 
 		return optimizedList;
