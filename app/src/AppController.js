@@ -385,10 +385,10 @@ function AppController(TherbligsDataService, TaskCardsDataService,
   */
   $scope.btnToggle = function($event){
     var cName = $event.target.className;
-    if (cName === "md-primary md-raised md-button md-ink-ripple")
-      $event.target.className = "md-primary md-button md-ink-ripple";
+    if (cName.includes("md-raised"))
+      $event.target.className = $event.target.className.replace(" md-raised","");   //"md-primary md-button md-ink-ripple";
     else
-      $event.target.className = "md-primary md-raised md-button md-ink-ripple";
+      $event.target.className += " md-raised ";   //"md-primary md-raised md-button md-ink-ripple";
   };
 }
 
